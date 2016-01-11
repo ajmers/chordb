@@ -1,0 +1,32 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "rules": {
+    "indent": [2, 4, { "SwitchCase": 1 }],
+    "max-len": [1, 120, 4],
+    "space-before-function-paren": [2, { "anonymous": "always", "named": "never" }],
+    "func-names": 0,
+    "jsx-quotes": [2, "prefer-single"],
+    "no-use-before-define": 0,
+    "no-unused-vars": [1, {"vars": "all", "args": "none"}],
+    "no-redeclare": 1,
+    "curly": [2, "multi-line", "consistent"],
+    "default-case": 1,
+    "no-shadow": 1,
+    "new-cap": [2, { "capIsNewExceptions": ["DragDropContext"] }],
+    "dot-notation": 1,
+    "padded-blocks": 1,
+    "react/jsx-boolean-value": [2, "always"],
+    "react/prop-types": [2, { "ignore": ["dispatch"] }],
+    "react/no-multi-comp": 1,
+    "react/sort-comp": 1,
+    "react/no-did-mount-set-state": 1,
+    "consistent-return": 0
+  },
+  "ecmaFeatures": {
+    "experimentalObjectRestSpread": true
+  },
+  "env": {
+    "jasmine": true
+  }
+}
