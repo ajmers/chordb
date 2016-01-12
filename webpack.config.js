@@ -1,24 +1,24 @@
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+var webpack = require('webpack'),
+    path              = require('path'),
+    HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
-    entry: {
-        app: [
-            'webpack-dev-server/client?http://0.0.0.0:3000', // WebpackDevServer host and port
-            'webpack/hot/only-dev-server',
-            './src/index.js',
-        ],
-   },
+    entry: [
+        'webpack-dev-server/client?http://localhost:8081',
+        'webpack/hot/dev-server',
+        './src/index.js',
+    ],
     output: {
         path: __dirname,
-        filename: "chordb.js"
+        filename: "chordb.js",
+    },
+    resolve: {
+        extensions: ['', '.jsx', '.scss', '.js', '.json'],
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            title: 'chordb',
-            filename: 'index.html',
-            template: 'src/index.template.ejs',
-        }),
         new webpack.HotModuleReplacementPlugin(),
     ],
+    devtool: '#source-map',
     module: {
         loaders: [
             {
@@ -36,8 +36,11 @@ module.exports = {
             },
             {
                 test: /\.s?css$/i,
-                loader: 'style!css!sass?' +
-                'includePaths[]=' + (path.resolve(__dirname, './node_modules')),
+                loaders: [
+                    require.resolve('style-loader'),
+                    require.resolve('css-loader') + '?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+                    require.resolve('sass-loader') + '?sourceMap'
+                 ]
             },
         ],
     },
