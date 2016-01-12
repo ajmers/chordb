@@ -1,13 +1,11 @@
 import 'babel-polyfill';
+import ChordWrapper from './views/chord-wrapper';
 
 /* React and Redux */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
 
 ReactDOM.render(
-    <div>
-        Hello
-    </div>,
-    document.getElementById('app')
+    <ChordWrapper />,
+    document.getElementById('app-wrapper')
 );
