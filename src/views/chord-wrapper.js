@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
+import Chord from './chord';
 
 export default class ChordWrapper extends Component {
     render() {
@@ -16,10 +17,7 @@ export default class ChordWrapper extends Component {
                         aspectRatio='wide'
                         image='https://placeimg.com/800/450/nature'
                     />
-                    <CardTitle
-                        title='This is a chord'
-                        subtitle='here is the chord'
-                    />
+                    <Chord/>
                     <CardText>Gb Minor!</CardText>
                 </Card>
             </div>

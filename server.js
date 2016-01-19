@@ -23,9 +23,13 @@ app.get('/*', function(req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/chords', function(req, res) {
+    res.send('chords!');
+});
+
 
 // -----your-webpack-dev-server------------------
-var server = new WebpackDevServer(compiler, {
+var wdServer = new WebpackDevServer(compiler, {
     contentBase: __dirname,
     hot: true,
     quiet: false,
@@ -36,5 +40,5 @@ var server = new WebpackDevServer(compiler, {
 });
 
 // run the two servers
-server.listen(8081, "localhost", function() {});
+wdServer.listen(8081, "localhost", function() {});
 app.listen(8080);
