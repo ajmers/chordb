@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import './string.scss';
+import './other-name.scss';
 
-
-export default class InstString extends Component {
+export default class InstrumentString extends Component {
     renderFret(isFretted) {
         const frettedClass = isFretted ? 'mark' : '';
         return (
