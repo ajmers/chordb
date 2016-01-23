@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import InstString from './string';
+import InstString from './instrument-string';
 
 const chord = {
     name: 'dm',
