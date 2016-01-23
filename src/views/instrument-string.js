@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import './instrument-string.scss';
 
 export default class InstrumentString extends Component {
     renderFret(isFretted) {
@@ -14,7 +15,7 @@ export default class InstrumentString extends Component {
         const fretArray = new Array(maxFret);
         fretArray.fill(0);
         return (
-            <div className={`string fret-${fret}`}>
+            <div className={`instrument-string fret-${fret}`}>
                 {fretArray.map((fretI, index) => {
                     console.log(fretI, index);
                     return this.renderFret(index === fret);

@@ -30,19 +30,19 @@ module.exports = {
                 loader: 'file-loader?name=images/[name].[ext]',
             },
             {
-                test    : /(\.scss|\.css)$/,
-                include : path.join(__dirname, '../../', 'src'),
-                loaders : [ 'style', 'css', 'sass' ]
-            },
-            {
-                test    : /(\.scss|\.css)$/,
-                include : /(node_modules)\/react-toolbox/,
-                loaders : [
-                    require.resolve('style-loader'),
-                    require.resolve('css-loader') + '?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-                    require.resolve('sass-loader') + '?sourceMap'
-                ]
-            },
+               test    : /(\.scss|\.css)$/,
+               exclude: /(node_modules)\/react-toolbox/,
+               loaders : [ 'style-loader', 'css-loader', 'sass-loader' ]
+             },
+             {
+               test    : /(\.scss|\.css)$/,
+               include : /(node_modules)\/react-toolbox/,
+               loaders : [
+                 require.resolve('style-loader'),
+                 require.resolve('css-loader') + '?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+                 require.resolve('sass-loader') + '?sourceMap',
+               ]
+             },
             {
                 test: /.(woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
                 loader: 'url-loader?limit=100000',
