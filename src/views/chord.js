@@ -14,6 +14,7 @@ const chord = {
 
 export default class Chord extends Component {
     render() {
+        console.log(InstString);
         const maxFret = Math.max.apply(null, chord.fingerings.map(string => string.fret));
         return (
             <div className={`chord ${chord.name} max-fret-${maxFret} strings-${chord.fingerings.length}`}>

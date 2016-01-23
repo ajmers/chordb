@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import './other-name.scss';
 
 export default class InstrumentString extends Component {
     renderFret(isFretted) {

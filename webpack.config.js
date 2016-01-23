@@ -1,6 +1,5 @@
 var webpack = require('webpack'),
-    path              = require('path'),
-    HtmlWebpackPlugin = require('html-webpack-plugin');
+    path = require('path');
 
 module.exports = {
     entry: [
@@ -10,7 +9,7 @@ module.exports = {
     ],
     output: {
         path: __dirname,
-        filename: "chordb.js",
+        filename: 'chordb.js',
     },
     resolve: {
         extensions: ['', '.jsx', '.scss', '.js', '.json'],
@@ -25,22 +24,28 @@ module.exports = {
                 test: /\.js(x?)$/,
                 exclude: /(node_modules|vendor)/,
                 loaders: ['react-hot', 'babel'],
-             },
+            },
             {
                 test: /\.(jpe?g|png|gif|svg|ico|cur)$/i,
                 loader: 'file-loader?name=images/[name].[ext]',
             },
             {
-                test: /.(woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
-                loader: 'url-loader?limit=100000',
+                test    : /(\.scss|\.css)$/,
+                include : path.join(__dirname, '../../', 'src'),
+                loaders : [ 'style', 'css', 'sass' ]
             },
             {
-                test: /\.s?css$/i,
-                loaders: [
+                test    : /(\.scss|\.css)$/,
+                include : /(node_modules)\/react-toolbox/,
+                loaders : [
                     require.resolve('style-loader'),
                     require.resolve('css-loader') + '?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
                     require.resolve('sass-loader') + '?sourceMap'
-                 ]
+                ]
+            },
+            {
+                test: /.(woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
+                loader: 'url-loader?limit=100000',
             },
         ],
     },
