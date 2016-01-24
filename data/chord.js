@@ -4,6 +4,7 @@ var Schema       = mongoose.Schema;
 var chordSchema = new Schema({
     instrument: String,
     tonic: String,
+    type: String,
     name: String,
     minFret: Number,
     fingerings: [{

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import InstString from './instrument-string';
+import InstString from '../instrument-string/instrument-string';
 
 import './chord.scss';
 
