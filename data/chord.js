@@ -3,9 +3,11 @@ var Schema       = mongoose.Schema;
 
 var chordSchema = new Schema({
     instrument: String,
+    tonic: String,
     name: String,
+    minFret: Number,
     fingerings: [{
-        stringName: String,
+        string: String,
         fret: String,
         finger: Number
     }],
