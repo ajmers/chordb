@@ -8,15 +8,15 @@
         font-family: arial;
         content: 'x';
         position: absolute;
-        top: -25px;
-        left: 20px;
+        top: -18%;
+        left: 70%;
     }
     &.no-fret:before {
         font-family: arial;
         content: 'o';
         position: absolute;
-        top: -25px;
-        left: 20px;
+        top: -18%;
+        left: 70%;
     }
     .fret {
         position: relative;
@@ -37,7 +37,7 @@
             width: 15px;
             border-radius: 15px;
             position: absolute;
-            left: 17px;
+            left: 65%;
         }
     }
     &:first-child {

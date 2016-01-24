@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import ChordCard from './chord-card';
+import './chord-wrapper.scss';
 
-import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
-import Chord from './chord';
-
-const fs6 = {
-    name: 'f#6',
+const mandoFs6 = {
+    name: 'Mandolin f#6',
     bar: false,
     minFret: 3,
     instrument: 'mandolin',
@@ -16,8 +15,8 @@ const fs6 = {
     ],
 };
 
-const dm = {
-    name: 'dm',
+const mandoDm = {
+    name: 'Mandolin dm',
     bar: true,
     instrument: 'mandolin',
     fingerings: [
@@ -28,8 +27,8 @@ const dm = {
     ],
 };
 
-const g = {
-    name: 'G',
+const mandoG = {
+    name: 'Mandolin G',
     instrument: 'mandolin',
     fingerings: [
         { string: 'G', fret: 0 },
@@ -39,19 +38,28 @@ const g = {
     ],
 };
 
+const guitarG = {
+    name: 'Guitar G',
+    instrument: 'guitar',
+    fingerings: [
+        { string: 'E', fret: 3 },
+        { string: 'A', fret: 2 },
+        { string: 'D', fret: 0 },
+        { string: 'G', fret: 0 },
+        { string: 'B', fret: 0 },
+        { string: 'E', fret: 3 },
+    ],
+};
+
 export default class ChordWrapper extends Component {
     render() {
         return (
             <div className='chords'>
                 <div id='chord-wrapper'>
-                    <Card style={{width: '350px'}}>
-                        <Chord chord={dm}/>
-                        <CardText>d minor</CardText>
-                    </Card>
-                    <Card style={{width: '350px'}}>
-                        <Chord chord={g}/>
-                        <CardText>G major</CardText>
-                    </Card>
+                    <ChordCard chord={mandoG}/>
+                    <ChordCard chord={mandoDm}/>
+                    <ChordCard chord={mandoFs6}/>
+                    <ChordCard chord={guitarG}/>
                 </div>
             </div>
         );
