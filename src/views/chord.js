@@ -1,28 +1,33 @@
 import React, { Component, PropTypes } from 'react';
-import InstString from './instrument-string.js';
+import InstString from './instrument-string';
 
-const chord = {
-    name: 'dm',
-    instrument: 'mandolin',
-    fingerings: [
-        { string: 'G', fret: 2 },
-        { string: 'D', fret: 3 },
-        { string: 'A', fret: 5 },
-        { string: 'E', fret: 0 },
-    ],
-};
+import './chord.scss';
 
 export default class Chord extends Component {
+    getMaxFret(chord) {
+        return Math.max.apply(null, chord.fingerings.map(string => {
+            return typeof string.fret === 'number' ? string.fret : 0;
+        }));
+    }
+
+    getMinFret(chord) {
+        return Math.min.apply(null, chord.fingerings.map(string => {
+            return typeof string.fret === 'number' ? string.fret : null;
+        }).filter(fret => !!fret));
+    }
+
     render() {
-        console.log(InstString);
-        const maxFret = Math.max.apply(null, chord.fingerings.map(string => string.fret));
+        const { chord } = this.props;
+        const maxFret = this.getMaxFret(chord);
+        const minFret = chord.minFret || this.getMinFret(chord);
         return (
             <div className={`chord ${chord.name} max-fret-${maxFret} strings-${chord.fingerings.length}`}>
                 {chord.fingerings.map(string => {
-                    return <InstString
+                    return (<InstString
                         string={string}
                         maxFret={maxFret}
-                    />
+                        minFret={minFret}
+                    />);
                 })}
             </div>
         );

@@ -12,7 +12,7 @@ module.exports = {
         filename: 'chordb.js',
     },
     resolve: {
-        extensions: ['', '.jsx', '.scss', '.js', '.json'],
+        extensions: ['', '.jsx', '.js', '.scss', '.json'],
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),

@@ -6,19 +6,26 @@ export default class InstrumentString extends Component {
         const frettedClass = isFretted ? 'mark' : '';
         return (
             <div className={`fret ${frettedClass}`}>
+                {isFretted ? <div className='dot'></div> : ''}
             </div>
         );
     }
     render() {
-        const { maxFret } = this.props;
-        const { fret } = this.props.string;
-        const fretArray = new Array(maxFret);
+        const { maxFret, minFret, string: { fret } } = this.props;
+
+        const unfrettedClass = fret === 0 ? 'no-fret' : '';
+        const unplayedClass = fret === 'x' ? 'unplayed' : '';
+        const fretClass = !(unfrettedClass || unplayedClass) ?
+            `fret-${fret}` : '';
+
+        const fretArray = new Array(Math.max(maxFret, 4));
         fretArray.fill(0);
         return (
-            <div className={`instrument-string fret-${fret}`}>
+            <div className={`instrument-string ${fretClass}
+                    ${unplayedClass} ${unfrettedClass}`}>
                 {fretArray.map((fretI, index) => {
-                    console.log(fretI, index);
-                    return this.renderFret(index === fret);
+                    const isFretted = (index === fret - 1) && !unfrettedClass;
+                    return this.renderFret(isFretted);
                 })}
             </div>
         );

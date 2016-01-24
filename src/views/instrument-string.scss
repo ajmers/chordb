@@ -1,3 +1,33 @@
 .instrument-string {
-    body: blue;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    border-left: 1px solid black;
+    .fret {
+        position: relative;
+        height: 30px;
+        border-bottom: 1px solid black;
+        &:first-child {
+            border-top: 2px solid black;
+        }
+        .dot {
+            top: 7px;
+            background-color: black;
+            height: 15px;
+            width: 15px;
+            border-radius: 15px;
+            position: absolute;
+            left: 17px;
+        }
+    }
+    &:first-child {
+        border-left: none;
+        & .fret {
+            border-top: none;
+            border-bottom: none;
+        }
+    }
+    &:last-child {
+        border-right: 1px solid black;
+    }
 }
