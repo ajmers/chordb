@@ -45,7 +45,7 @@ export default class ChordWrapper extends Component {
             <div className='chords'>
                 <div id='chord-wrapper'>
                     <Card style={{width: '350px'}}>
-                        <Chord chord={fs6}/>
+                        <Chord chord={dm}/>
                         <CardText>d minor</CardText>
                     </Card>
                     <Card style={{width: '350px'}}>
