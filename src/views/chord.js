@@ -21,7 +21,7 @@ export default class Chord extends Component {
         const maxFret = this.getMaxFret(chord);
         const minFret = chord.minFret || this.getMinFret(chord);
         return (
-            <div className={`chord ${chord.name} max-fret-${maxFret} strings-${chord.fingerings.length}`}>
+            <div className={`chord ${chord.name}`}>
                 {chord.fingerings.map(string => {
                     return (<InstString
                         string={string}

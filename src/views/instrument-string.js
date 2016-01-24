@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import './instrument-string.scss';
 
 export default class InstrumentString extends Component {
-    renderFret(isFretted) {
+    renderFret(isFretted, fret) {
         const frettedClass = isFretted ? 'mark' : '';
         return (
             <div className={`fret ${frettedClass}`}>
-                {isFretted ? <div className='dot'></div> : ''}
+                {isFretted ? <div className='dot'>{fret}</div> : ''}
             </div>
         );
     }
@@ -14,7 +14,7 @@ export default class InstrumentString extends Component {
         const { maxFret, minFret, string: { fret } } = this.props;
 
         const unfrettedClass = fret === 0 ? 'no-fret' : '';
-        const unplayedClass = fret === 'x' ? 'unplayed' : '';
+        const unplayedClass = fret === 'X' ? 'unplayed' : '';
         const fretClass = !(unfrettedClass || unplayedClass) ?
             `fret-${fret}` : '';
 
@@ -25,7 +25,7 @@ export default class InstrumentString extends Component {
                     ${unplayedClass} ${unfrettedClass}`}>
                 {fretArray.map((fretI, index) => {
                     const isFretted = (index === fret - 1) && !unfrettedClass;
-                    return this.renderFret(isFretted);
+                    return this.renderFret(isFretted, fret);
                 })}
             </div>
         );

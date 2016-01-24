@@ -3,8 +3,24 @@
     flex: 1;
     flex-direction: column;
     border-left: 1px solid black;
+    position: relative;
+    &.unplayed:before {
+        font-family: arial;
+        content: 'x';
+        position: absolute;
+        top: -25px;
+        left: 20px;
+    }
+    &.no-fret:before {
+        font-family: arial;
+        content: 'o';
+        position: absolute;
+        top: -25px;
+        left: 20px;
+    }
     .fret {
         position: relative;
+        flex: 1;
         height: 30px;
         border-bottom: 1px solid black;
         &:first-child {
@@ -12,6 +28,10 @@
         }
         .dot {
             top: 7px;
+            color: white;
+            font-size: 9px;
+            text-align: center;
+            line-height: 15px;
             background-color: black;
             height: 15px;
             width: 15px;
