@@ -15,7 +15,8 @@ var mongoose = require('mongoose');
 var Chord = require('./data/chord');
 var dbConfig = require('./config');
 //database: 'mongodb://localhost:27017/chordb'
-var db = mongoose.createConnection(dbConfig.database);
+mongoose.connect(dbConfig.database);
+var db = mongoose.connection;
 db.on('error', function() {
     console.info('Error: Could not connect to MongoDB. Did you forget to run `mongod`?');
 });
@@ -61,24 +62,19 @@ app.get('/*', function(req, res) {
 });
 
 router.route('/chords')
-    // create a bear (accessed at POST http://localhost:8080/api/bears)
+    // create a chord (accessed at POST http://localhost:8080/api/chords)
     .post(function(req, res) {
-        debugger;
-        var chord = new Chord();      // create a new instance of the Chord model
-        chord.name = req.body.name;
-
+        var chord = new Chord(req.body);      // create a new instance of the Chord model
         // save the bear and check for errors
         chord.save(function(err) {
-            debugger;
             if (err)
                 res.send(err);
 
-            res.json({ message: 'Bear created!' });
+            res.json({ message: 'Chord created!' });
         });
     })
     .get(function(req, res) {
          Chord.find(function(err, chords) {
-            debugger;
             if (err)
                 res.send(err);
 
@@ -89,9 +85,10 @@ router.route('/chords')
 router.route('/chords/:chord_id')
     // get all the bears (accessed at GET http://localhost:8080/api/bears)
     .get(function(req, res) {
-        debugger;
-        res.send({name: 'em', fingerings: []})
+        Chord.findById(req.params.chord_id, function(err, chord) {
+            res.json(chord);
         });
+    });
 
 // -----your-webpack-dev-server------------------
 var wdServer = new WebpackDevServer(compiler, {
