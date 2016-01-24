@@ -1,7 +1,8 @@
 [
     {
-        "name": "Mandolin f#6",
+        "name": "f#6",
         "tonic": "f#",
+        "type": "6",
         "bar": false,
         "minFret": 3,
         "instrument": "mandolin",
@@ -13,10 +14,11 @@
         ]
     },
     {
-        "name": "Mandolin dm",
-        "tonic": "d",
-        "bar": true,
         "instrument": "mandolin",
+        "name": "dm",
+        "tonic": "d",
+        "type": "minor",
+        "bar": true,
         "fingerings": [
             { "string": "G", "fret": 2 },
             { "string": "D", "fret": 3 },
@@ -25,9 +27,10 @@
         ]
     },
     {
-        "name": "Mandolin G",
-        "tonic": "g",
         "instrument": "mandolin",
+        "name": "G",
+        "type": "major",
+        "tonic": "g",
         "fingerings": [
             { "string": "G", "fret": 0 },
             { "string": "D", "fret": 0 },
@@ -36,9 +39,10 @@
         ]
     },
     {
-        "name": "Guitar G",
-        "tonic": "g",
         "instrument": "guitar",
+        "name": "G",
+        "tonic": "g",
+        "type": "major",
         "fingerings": [
             { "string": "E", "fret": 3 },
             { "string": "A", "fret": 2 },
