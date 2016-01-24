@@ -5,19 +5,21 @@ import './chord-wrapper.scss';
 
 const mandoFs6 = {
     name: 'Mandolin f#6',
+    tonic: 'f#',
     bar: false,
     minFret: 3,
     instrument: 'mandolin',
     fingerings: [
-        { string: 'G', fret: 3 },
-        { string: 'D', fret: 1 },
-        { string: 'A', fret: 4 },
-        { string: 'E', fret: 2 },
+        { string: 'G', fret: 3, finger: 3 },
+        { string: 'D', fret: 1, finger: 1 },
+        { string: 'A', fret: 4, finger: 4 },
+        { string: 'E', fret: 2, finger: 2 },
     ],
 };
 
 const mandoDm = {
     name: 'Mandolin dm',
+    tonic: 'd',
     bar: true,
     instrument: 'mandolin',
     fingerings: [
@@ -30,6 +32,7 @@ const mandoDm = {
 
 const mandoG = {
     name: 'Mandolin G',
+    tonic: 'g',
     instrument: 'mandolin',
     fingerings: [
         { string: 'G', fret: 0 },
@@ -41,6 +44,7 @@ const mandoG = {
 
 const guitarG = {
     name: 'Guitar G',
+    tonic: 'g',
     instrument: 'guitar',
     fingerings: [
         { string: 'E', fret: 3 },
@@ -69,6 +73,7 @@ export default class ChordWrapper extends Component {
                     <ChordCard chord={mandoG}/>
                     <ChordCard chord={mandoDm}/>
                     <ChordCard chord={mandoFs6}/>
+                    <ChordCard chord={guitarG}/>
                     <ChordCard chord={guitarG}/>
                 </div>
             </div>

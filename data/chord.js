@@ -6,9 +6,9 @@ var chordSchema = new Schema({
     name: String,
     fingerings: [{
         stringName: String,
-        position: String
+        fret: String,
+        finger: Number
     }],
-    types: [String]
 });
 
 module.exports = mongoose.model('Chord', chordSchema);
