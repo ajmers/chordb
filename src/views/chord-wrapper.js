@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ChordCard from './chord-card';
+import $ from 'jquery';
 import './chord-wrapper.scss';
 
 const mandoFs6 = {
@@ -52,6 +53,15 @@ const guitarG = {
 };
 
 export default class ChordWrapper extends Component {
+    componentDidMount() {
+        $.ajax({
+            url: 'http://localhost:8080/api/chords',
+            success: function(res) {
+                console.log(res);
+            }
+        });
+    }
+
     render() {
         return (
             <div className='chords'>

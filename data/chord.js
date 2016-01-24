@@ -1,6 +1,7 @@
-var mongoose = require('mongoose');
+var mongoose     = require('mongoose');
+var Schema       = mongoose.Schema;
 
-var chordSchema = new mongoose.Schema({
+var chordSchema = new Schema({
     instrument: String,
     name: String,
     fingerings: [{
