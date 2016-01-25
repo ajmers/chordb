@@ -40,6 +40,48 @@
     },
     {
         "instrument": "guitar",
+        "name": "C minor",
+        "tonic": "c",
+        "type": "minor",
+        "fingerings": [
+            { "string": "E", "fret": 0 },
+            { "string": "A", "fret": 3 },
+            { "string": "D", "fret": 5 },
+            { "string": "G", "fret": 5 },
+            { "string": "B", "fret": 4 },
+            { "string": "E", "fret": 3 }
+        ]
+    },
+    {
+        "instrument": "guitar",
+        "name": "C7",
+        "tonic": "c",
+        "type": "7",
+        "fingerings": [
+            { "string": "E", "fret": 0 },
+            { "string": "A", "fret": 3 },
+            { "string": "D", "fret": 2 },
+            { "string": "G", "fret": 3 },
+            { "string": "B", "fret": 1 },
+            { "string": "E", "fret": "X" }
+        ]
+    },
+    {
+        "instrument": "guitar",
+        "name": "C major",
+        "tonic": "c",
+        "type": "major",
+        "fingerings": [
+            { "string": "E", "fret": "X" },
+            { "string": "A", "fret": 3 },
+            { "string": "D", "fret": 2 },
+            { "string": "G", "fret": 0 },
+            { "string": "B", "fret": 1 },
+            { "string": "E", "fret": 0 }
+        ]
+    },
+    {
+        "instrument": "guitar",
         "name": "G",
         "tonic": "g",
         "type": "major",
@@ -50,6 +92,43 @@
             { "string": "G", "fret": 0 },
             { "string": "B", "fret": 0 },
             { "string": "E", "fret": 3 }
+        ]
+    },
+    {
+        "instrument": "mandolin",
+        "name": "C",
+        "tonic": "c",
+        "type": "major",
+        "fingerings": [
+            { "string": "G", "fret": 0 },
+            { "string": "D", "fret": 2 },
+            { "string": "A", "fret": 3 },
+            { "string": "E", "fret": 0 }
+        ]
+    },
+    {
+        "instrument": "mandolin",
+        "name": "cm",
+        "tonic": "c",
+        "type": "minor",
+        "fingerings": [
+            { "string": "G", "fret": 3 },
+            { "string": "D", "fret": 3 },
+            { "string": "A", "fret": 4 },
+            { "string": "E", "fret": 1 }
+        ]
+    },
+    {
+        "instrument": "mandolin",
+        "name": "c0",
+        "minFret": 3,
+        "tonic": "c",
+        "type": "diminished",
+        "fingerings": [
+            { "string": "G", "fret": 1 },
+            { "string": "D", "fret": 2 },
+            { "string": "A", "fret": 3 },
+            { "string": "E", "fret": 4 }
         ]
     }
 ]

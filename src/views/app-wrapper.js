@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import ChordCard from '../components/chord-card/chord-card';
+import ChordFilters from './chord-filter';
 
 import { fetchChords } from '../state/actions';
 
@@ -16,8 +17,11 @@ class AppWrapper extends Component {
     render() {
         const { chords } = this.props;
         return (
-            <div className='chords'>
-                <div id='chord-wrapper'>
+            <div>
+                <div className='filters'>
+                    <ChordFilters />
+                </div>
+                <div className='chords'>
                     {chords.map(chord => {
                         return <ChordCard chord={chord}/>
                      })}
