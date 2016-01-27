@@ -5,6 +5,7 @@ export const instrumentFilter = {
     onChange: instrumentFilterChanged,
     defaultValue: 'Mandolin',
     options: [
+        { value: 'All', label: 'All' },
         { value: 'Guitar', label: 'Guitar' },
         { value: 'Mandolin', label: 'Mandolin' },
     ],
@@ -15,6 +16,7 @@ export const tonicFilter = {
     defaultValue: 'C',
     onChange: tonicFilterChanged,
     options: [
+        { value: 'All', label: 'All' },
         { value: 'C', label: 'C' },
         { value: 'C#', label: 'C#' },
         { value: 'D', label: 'D' },

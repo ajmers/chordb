@@ -12,6 +12,11 @@ class ChordFilters extends Component {
         filters: PropTypes.object,
     };
 
+    onFilterChange = (handler, value) => {
+        const { dispatch } = this.props;
+        dispatch(handler(value));
+    };
+
     renderFilter = (filter, index) => {
         const { filters } = this.props;
         const value = filters[filter.name];
@@ -19,7 +24,8 @@ class ChordFilters extends Component {
             <div className='search-filter' key={index}>
                 <Dropdown
                     auto={true}
-                    onChange={filter.onChange}
+                    onChange={this.onFilterChange.bind(this, filter.onChange)}
+                    label={filter.name}
                     source={filter.options}
                     value={value || filter.defaultValue}
                   />
