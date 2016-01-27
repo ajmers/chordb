@@ -1,8 +1,9 @@
 import createReducer from '../../utils/create-reducer';
 
 const initialState = {
-    instrument: 'Mandolin',
-    tonic: 'F#',
+    instrument: 'All',
+    tonic: 'All',
+    type: 'All',
 };
 
 export default createReducer(initialState, {
@@ -11,6 +12,13 @@ export default createReducer(initialState, {
         return {
             ...state,
             instrument,
+        };
+    },
+    ['TYPE_FILTERED']: (state, action) => {
+        const { type } = action.data;
+        return {
+            ...state,
+            type,
         };
     },
     ['TONIC_FILTERED']: (state, action) => {

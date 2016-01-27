@@ -1,9 +1,9 @@
-import { instrumentFilterChanged, tonicFilterChanged } from '../state/actions/filter-actions';
+import { instrumentFilterChanged, tonicFilterChanged, typeFilterChanged } from '../state/actions/filter-actions';
 
 export const instrumentFilter = {
     name: 'instrument',
     onChange: instrumentFilterChanged,
-    defaultValue: 'Mandolin',
+    defaultValue: 'All',
     options: [
         { value: 'All', label: 'All' },
         { value: 'Guitar', label: 'Guitar' },
@@ -11,9 +11,24 @@ export const instrumentFilter = {
     ],
 };
 
+export const typeFilter = {
+    name: 'type',
+    onChange: typeFilterChanged,
+    defaultValue: 'All',
+    options: [
+        { value: 'All', label: 'All' },
+        { value: 'Major', label: 'Major' },
+        { value: 'Minor', label: 'Minor' },
+        { value: 'Diminished', label: 'Diminished' },
+        { value: 'Augmented', label: 'Augmented' },
+        { value: '7', label: '7' },
+        { value: '6', label: '6' },
+    ],
+};
+
 export const tonicFilter = {
     name: 'tonic',
-    defaultValue: 'C',
+    defaultValue: 'All',
     onChange: tonicFilterChanged,
     options: [
         { value: 'All', label: 'All' },

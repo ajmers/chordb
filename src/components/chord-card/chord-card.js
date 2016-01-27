@@ -8,10 +8,10 @@ export default class ChordCard extends Component {
     render() {
         const { chord } = this.props;
         return (
-            <Card>
+            <Card className='chord-card'>
                 <Chord chord={chord}/>
-                <CardText>
-                    <div className='chord-name'>Chord: {chord.name}</div>
+                <CardText className='chord-details'>
+                    <div className='chord-name'>{chord.name}</div>
                     <div className='instrument-name'>{chord.instrument}</div>
                 </CardText>
             </Card>
