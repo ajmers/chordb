@@ -4,7 +4,7 @@ TODO:
 - allow searching by instrument, tonic, type (major, minor, etc)
 - add user, song models so user can add chord variants to a song cheat-sheet
 
-To seed database from JSON: 
+To seed database from included seeds/chords.json: 
 - Make sure node-mongo-seeds is installed globally (`npm install -g node-mongo-seeds`).
 - Run `seed` from root directory.
 
