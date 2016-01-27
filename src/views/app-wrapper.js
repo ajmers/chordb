@@ -1,17 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { filteredChordSelector } from '../state/reducers/chord-selector';
 
 import ChordCard from '../components/chord-card/chord-card';
 import ChordFilters from './chord-filter';
 
-import { fetchChords } from '../state/actions';
+import { fetchChords } from '../state/actions/chord-actions';
 
 import './app-wrapper.scss';
 
 class AppWrapper extends Component {
     static propTypes = {
-        fetchChords: PropTypes.func.isRequired,
-        chords: PropTypes.arrayOf(PropTypes.object),
+        filteredChords: PropTypes.arrayOf(PropTypes.object),
     };
 
     componentWillMount() {
@@ -20,7 +20,7 @@ class AppWrapper extends Component {
     }
 
     render() {
-        const { chords } = this.props;
+        const { filteredChords: chords = [] } = this.props;
         return (
             <div>
                 <div className='filters'>
@@ -28,8 +28,8 @@ class AppWrapper extends Component {
                 </div>
                 <div className='chords'>
                     {chords.map((chord, index) => {
-                        return <ChordCard className='chordCard'
-                            chord={chord} key={index}/>;
+                        return (<ChordCard className='chordCard'
+                            chord={chord} key={index}/>);
                     })}
                 </div>
             </div>
@@ -37,4 +37,4 @@ class AppWrapper extends Component {
     }
 }
 
-export default connect(state => ({ chords: state.chords }))(AppWrapper);
+export default connect(state => ({ filteredChords: filteredChordSelector(state) }))(AppWrapper);

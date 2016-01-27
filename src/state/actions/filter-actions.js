@@ -1,13 +1,17 @@
 export function instrumentFilterChanged(value) {
     return {
         type: 'INSTRUMENT_FILTERED',
-        instrument: value,
+        data: {
+            instrument: value,
+        },
     };
 }
 
 export function tonicFilterChanged(value) {
     return {
         type: 'TONIC_FILTERED',
-        tonic: value,
+        data: {
+            tonic: value,
+        },
     };
 }

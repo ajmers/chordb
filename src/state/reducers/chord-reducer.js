@@ -1,13 +1,10 @@
+import createReducer from '../../utils/create-reducer';
+
 const initialState = [];
 
-const actionsMap = {
-    'FETCHED_CHORDS': (state, action) => action.chords,
-};
-
-export default function chords(state = initialState, action) {
-    const fn = actionsMap[action.type];
-    if (!fn) {
-        return state;
-    }
-    return fn(state, action);
-}
+export default createReducer(initialState, {
+    ['FETCHED_CHORDS']: (state, action) => {
+        const { chords: fetchedChords } = action.data;
+        return fetchedChords;
+    },
+});
