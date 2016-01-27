@@ -12,3 +12,5 @@ To run app:
 To seed database from JSON: 
 - Make sure node-mongo-seeds is installed globally (`npm install -g node-mongo-seeds`).
 - Run `seed` from root directory.
+
+![Chords and filters](/../screenshots/README_IMGS/screenshot.png?raw=true)
