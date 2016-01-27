@@ -1,0 +1,12 @@
+.chord-card {
+    max-width: 250px;
+    display: flex;
+    align-items: center;
+    .chord-details {
+        width: 50%;
+        text-align: right;
+    }
+    .chord-name {
+        font-weight: bold;
+    }
+}

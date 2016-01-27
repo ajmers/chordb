@@ -28,7 +28,7 @@ class AppWrapper extends Component {
                 </div>
                 <div className='chords'>
                     {chords.map((chord, index) => {
-                        return (<ChordCard className='chordCard'
+                        return (<ChordCard
                             chord={chord} key={index}/>);
                     })}
                 </div>
