@@ -26,9 +26,11 @@
   },
   "homepage": "https://github.com/ajmers/chordb#readme",
   "dependencies": {
+    "babel-core": "^6.4.5",
     "babel-eslint": "^4.1.5",
-    "babel-loader": "^5.2.2",
+    "babel-loader": "^6.1.0",
     "babel-polyfill": "^6.2.0",
+    "babel-preset-react": "^6.3.13",
     "babelify": "^7.2.0",
     "body-parser": "^1.14.2",
     "css-loader": "^0.23.1",
@@ -56,6 +58,9 @@
     "webpack-dev-server": "^1.14.0"
   },
   "devDependencies": {
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "html-webpack-plugin": "^1.7.0",
