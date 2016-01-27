@@ -1,6 +1,12 @@
 #app-wrapper {
     font-family: Roboto;
+    display: flex;
+    .controls {
+        display: flex;
+        justify-content: space-between;
+    }
     .chords {
         display: flex;
+        flex-wrap: wrap;
     }
 }
