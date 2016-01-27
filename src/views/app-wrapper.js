@@ -9,6 +9,11 @@ import { fetchChords } from '../state/actions';
 import './app-wrapper.scss';
 
 class AppWrapper extends Component {
+    static propTypes = {
+        fetchChords: PropTypes.func.isRequired,
+        chords: PropTypes.arrayOf(PropTypes.object),
+    };
+
     componentWillMount() {
         const { dispatch } = this.props;
         dispatch(fetchChords());
@@ -22,9 +27,10 @@ class AppWrapper extends Component {
                     <ChordFilters />
                 </div>
                 <div className='chords'>
-                    {chords.map(chord => {
-                        return <ChordCard chord={chord}/>
-                     })}
+                    {chords.map((chord, index) => {
+                        return <ChordCard className='chordCard'
+                            chord={chord} key={index}/>;
+                    })}
                 </div>
             </div>
         );

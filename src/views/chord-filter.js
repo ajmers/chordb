@@ -1,24 +1,41 @@
 import React, { Component, PropTypes } from 'react';
 import Dropdown from 'react-toolbox/lib/dropdown';
 import { connect } from 'react-redux';
+import { instrumentFilter, tonicFilter } from './filter-options';
 
-const instrumentOptions = [
-  { value: 'Guitar', label: 'Guitar' },
-  { value: 'Mandolin', label: 'Mandolin'},
-];
+import './chord-filter.scss';
+
+const filterOptions = [instrumentFilter, tonicFilter];
 
 class ChordFilters extends Component {
+    static propTypes = {
+        filters: PropTypes.object,
+    };
+
+    renderFilter = (filter, index) => {
+        const { filters } = this.props;
+        const value = filters[filter.name];
+        return (
+            <div className='search-filter' key={index}>
+                <Dropdown
+                    auto={true}
+                    onChange={filter.onChange}
+                    source={filter.options}
+                    value={value || filter.defaultValue}
+                  />
+            </div>
+        );
+    };
 
     render() {
-        const { chords } = this.props;
         return (
-            <Dropdown
-                auto={true}
-                source={instrumentOptions}
-                value='mandolin'
-              />
+            <div className='search-filters'>
+            {filterOptions.map(this.renderFilter)}
+            </div>
         );
     }
 }
 
-export default connect(state => ({ chords: state.chords }))(ChordFilters);
+export default connect(state => {
+    return ({ filters: state.filters });
+})(ChordFilters);
