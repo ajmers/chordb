@@ -12,16 +12,15 @@ import { Provider } from 'react-redux';
 import configureStore from './state/configure-store';
 
 /* Application-Specific */
-import { AppRouter } from './views';
+import AppWrapper from './views/app-wrapper';
 import './assets/styles/styles.scss';
 
 // Creates the top-level application store
 const store = configureStore();
-
 // Renders the application to the DOM
 ReactDOM.render(
     <Provider store={store}>
-        <AppRouter store={store} />
+        <AppWrapper/>
     </Provider>,
     document.getElementById('app-wrapper')
 );

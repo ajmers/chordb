@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Card, CardMedia, CardTitle, CardText, CardActions } from 'react-toolbox/lib/card';
-import Chord from '../';
+import Chord from '../chord/chord';
 
 import './chord-card.scss'
 

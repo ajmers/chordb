@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { filteredChordSelector } from '../state/reducers/chord-selector';
 
-import { ChordCard } from '../components';
+import { ChordCard } from '../components/chord-card/chord-card';
 
 import { Button } from 'react-toolbox/lib/button';
 import Drawer from 'react-toolbox/lib/drawer';
@@ -17,10 +17,6 @@ import './app-wrapper.scss';
 
 class AppWrapper extends Component {
     static propTypes = {
-        store: PropTypes.shape({
-            dispatch: PropTypes.func.isRequired,
-            getState: PropTypes.func.isRequired,
-        }).isRequired,
         addChordOpen: PropTypes.bool.isRequired,
         filteredChords: PropTypes.arrayOf(PropTypes.object),
     };
@@ -42,6 +38,7 @@ class AppWrapper extends Component {
 
     render() {
         const { filteredChords: chords = [], addChordOpen } = this.props;
+        console.log(NewChordEntry, ChordCard);
         return (
             <div>
                 <div className='controls'>
