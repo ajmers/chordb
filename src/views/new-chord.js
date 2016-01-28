@@ -13,10 +13,6 @@ const filterOptions = [instrumentFilter, tonicFilter, typeFilter];
 
 class NewChordEntry extends Component {
     static propTypes = {
-        store: PropTypes.shape({
-            dispatch: PropTypes.func.isRequired,
-            getState: PropTypes.func.isRequired,
-        }).isRequired,
         pickers: PropTypes.object,
     };
 
