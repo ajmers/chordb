@@ -2,10 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { filteredChordSelector } from '../state/reducers/chord-selector';
 
-import { Button, IconButton } from 'react-toolbox/lib/button';
+import { ChordCard } from '../components';
+
+import { Button } from 'react-toolbox/lib/button';
 import Drawer from 'react-toolbox/lib/drawer';
-import ChordCard from '../components/chord-card/chord-card';
-import ChordFilters from './chord-filter';
+
+import NewChordEntry from './new-chord';
+import ChordFilters from './chord-filters';
 
 import { fetchChords } from '../state/actions/chord-actions';
 import { addChordOpened, addChordClosed } from '../state/actions/app-actions';
@@ -14,8 +17,11 @@ import './app-wrapper.scss';
 
 class AppWrapper extends Component {
     static propTypes = {
+        store: PropTypes.shape({
+            dispatch: PropTypes.func.isRequired,
+            getState: PropTypes.func.isRequired,
+        }).isRequired,
         addChordOpen: PropTypes.bool.isRequired,
-        addChordClosed: PropTypes.bool.isRequired,
         filteredChords: PropTypes.arrayOf(PropTypes.object),
     };
 
@@ -57,6 +63,7 @@ class AppWrapper extends Component {
                         <Button className='close-add-chord'
                             onClick={this.handleDrawerClick}
                             icon='close' inverted mini floating />
+                        <NewChordEntry {...this.props} />
                 </Drawer>
 
                 <div className='chords'>

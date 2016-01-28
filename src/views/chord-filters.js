@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import Dropdown from 'react-toolbox/lib/dropdown';
 import { connect } from 'react-redux';
-import { instrumentFilter, tonicFilter, typeFilter } from './filter-options';
+import { instrumentFilter, tonicFilter, typeFilter } from '../constants/filter-options';
 
-import './chord-filter.scss';
+import './chord-filters.scss';
 
 const filterOptions = [instrumentFilter, tonicFilter, typeFilter];
 
