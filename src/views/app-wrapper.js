@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { filteredChordSelector } from '../state/reducers/chord-selector';
 
-import { ChordCard } from '../components/chord-card/chord-card';
+import ChordCard from '../components/chord-card/chord-card';
 
 import { Button } from 'react-toolbox/lib/button';
 import Drawer from 'react-toolbox/lib/drawer';
@@ -38,7 +38,6 @@ class AppWrapper extends Component {
 
     render() {
         const { filteredChords: chords = [], addChordOpen } = this.props;
-        console.log(NewChordEntry, ChordCard);
         return (
             <div>
                 <div className='controls'>
