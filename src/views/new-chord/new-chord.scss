@@ -1,0 +1,28 @@
+.add-chord-region {
+    font-family: Roboto;
+    width: 50%;
+    .new-chord-entry {
+        padding: 10px;
+    }
+    .new-chord__options {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .search-filter {
+        padding: 10px;
+        width: 25%;
+        &__dropdown {
+            ul {
+                padding-left: 0px;
+            }
+            input {
+                font-size: 1rem;
+            }
+        }
+    }
+    .new-chord__grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
