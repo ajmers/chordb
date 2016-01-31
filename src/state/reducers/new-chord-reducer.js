@@ -4,6 +4,7 @@ const initialState = {
     instrument: 'Choose one',
     tonic: 'Choose one',
     type: 'Choose one',
+    instrumentChosen: false,
 };
 
 export default createReducer(initialState, {
@@ -12,6 +13,7 @@ export default createReducer(initialState, {
         return {
             ...state,
             instrument,
+            instrumentChosen: instrument !== 'Choose one',
         };
     },
     ['TYPE_UPDATED']: (state, action) => {

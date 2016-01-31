@@ -3,6 +3,8 @@ import Dropdown from 'react-toolbox/lib/dropdown';
 import { connect } from 'react-redux';
 import { instrumentOptions, tonicOptions, typeOptions } from '../constants/chord-options';
 import { Chord } from '../classes/chord';
+
+import ChordCard from '../components/chord-card/chord-card';
 import { chordPropertyUpdated } from '../state/actions/add-chord-actions';
 import './new-chord.scss';
 
@@ -24,7 +26,6 @@ class NewChordEntry extends Component {
             option.options.push({ value: 'Choose one', label: 'Choose one' });
             option.defaultValue = 'Choose one';
         });
-        this.chord = new Chord('');
     }
 
     onPickerChange = (key, value) => {
@@ -33,9 +34,12 @@ class NewChordEntry extends Component {
     };
 
     renderPicker = (picker, index) => {
-        const { chordProperties } = this.props;
-        const value = chordProperties[picker.name];
-        return (
+        const { chordProperties: chordProps } = this.props;
+        // Don't render pickers besides instrument until instrument is chosen.
+
+        const value = chordProps[picker.name];
+        const renderOption = chordProps.instrumentChosen || picker.name === 'instrument';
+        return renderOption ? (
             <div className='search-filter' key={index}>
                 <Dropdown
                     className='search-filter__dropdown'
@@ -46,7 +50,19 @@ class NewChordEntry extends Component {
                     value={value || picker.defaultValue}
                   />
             </div>
-        );
+        ) : '';
+    };
+
+    renderChart = () => {
+        const { chordProperties: chordProps } = this.props;
+        if (!chordProps.instrumentChosen) {
+            return '';
+        } else {
+            this.chord = this.chord || new Chord({
+                instrument: chordProps.instrument,
+            });
+            return <ChordCard chord={this.chord} />;
+        }
     };
 
     render() {
@@ -56,7 +72,7 @@ class NewChordEntry extends Component {
                     {chordOptions.map(this.renderPicker)}
                 </div>
                 <div className='new-chord-grid'>
-
+                    {this.renderChart()}
                 </div>
             </div>
         );
