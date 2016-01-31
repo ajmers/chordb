@@ -20,7 +20,7 @@ const store = configureStore();
 // Renders the application to the DOM
 ReactDOM.render(
     <Provider store={store}>
-        <AppWrapper/>
+        <AppWrapper store={store}/>
     </Provider>,
     document.getElementById('app-wrapper')
 );

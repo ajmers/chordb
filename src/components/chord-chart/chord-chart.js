@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import InstString from '../instrument-string/instrument-string';
 
-import './chord.scss';
+import './chord-chart.scss';
 
-export default class Chord extends Component {
+export default class ChordChart extends Component {
     getMaxFret(chord) {
         return Math.max.apply(null, chord.fingerings.map(string => {
             return typeof string.fret === 'number' ? string.fret : 0;
@@ -21,7 +21,7 @@ export default class Chord extends Component {
         const maxFret = this.getMaxFret(chord);
         const minFret = chord.minFret || this.getMinFret(chord);
         return (
-            <div className={`chord ${chord.name}`}>
+            <div className='chord-chart'>
                 {chord.fingerings.map((string, i) => {
                     return (<InstString key={i}
                         string={string}
