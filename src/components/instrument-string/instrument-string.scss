@@ -1,5 +1,6 @@
 .instrument-string {
     display: flex;
+    height: 100%;
     flex: 1;
     flex-direction: column;
     border-left: 1px solid black;
@@ -22,7 +23,7 @@
         position: relative;
         flex: 1;
         height: 30px;
-        border: none;
+        border-bottom: 1px solid black;
         &:first-child {
             border-top: 2px solid black;
         }

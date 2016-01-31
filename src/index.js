@@ -13,7 +13,6 @@ import configureStore from './state/configure-store';
 
 /* Application-Specific */
 import AppWrapper from './views/app-wrapper';
-import './assets/styles/styles.scss';
 
 // Creates the top-level application store
 const store = configureStore();

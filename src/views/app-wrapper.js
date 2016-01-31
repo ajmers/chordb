@@ -7,8 +7,8 @@ import ChordCard from '../components/chord-card/chord-card';
 import { Button } from 'react-toolbox/lib/button';
 import Drawer from 'react-toolbox/lib/drawer';
 
-import NewChordEntry from './new-chord';
-import ChordFilters from './chord-filters';
+import NewChordEntry from './new-chord/new-chord';
+import ChordFilters from './chord-filters/chord-filters';
 
 import { fetchChords } from '../state/actions/chord-actions';
 import { addChordOpened, addChordClosed } from '../state/actions/app-actions';

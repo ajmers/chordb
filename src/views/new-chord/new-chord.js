@@ -1,24 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import Dropdown from 'react-toolbox/lib/dropdown';
 import { connect } from 'react-redux';
-import { instrumentOptions, tonicOptions, typeOptions } from '../constants/chord-options';
-import { Chord } from '../classes/chord';
+import { instrumentOptions, tonicOptions, typeOptions } from '../../constants/chord-options';
 
-import ChordCard from '../components/chord-card/chord-card';
-import { chordPropertyUpdated } from '../state/actions/add-chord-actions';
+import ChordCard from '../../components/chord-card/chord-card';
+import { chordPropertyUpdated } from '../../state/actions/add-chord-actions';
 import './new-chord.scss';
-
-const instrumentTemplates = {
-    guitar: 6,
-    mandolin: 4,
-    banjo: 5,
-};
 
 const chordOptions = [instrumentOptions, tonicOptions, typeOptions];
 
 class NewChordEntry extends Component {
     static propTypes = {
         chordProperties: PropTypes.object,
+        chord: PropTypes.object,
     };
 
     componentWillMount() {
@@ -54,24 +48,21 @@ class NewChordEntry extends Component {
     };
 
     renderChart = () => {
-        const { chordProperties: chordProps } = this.props;
+        const { chordProperties: chordProps, chord } = this.props;
         if (!chordProps.instrumentChosen) {
             return '';
         } else {
-            this.chord = this.chord || new Chord({
-                instrument: chordProps.instrument,
-            });
-            return <ChordCard chord={this.chord} />;
+            return <ChordCard chord={chord} />;
         }
     };
 
     render() {
         return (
             <div className='new-chord-entry'>
-                <div className='new-chord-options'>
+                <div className='new-chord__options'>
                     {chordOptions.map(this.renderPicker)}
                 </div>
-                <div className='new-chord-grid'>
+                <div className='new-chord__grid'>
                     {this.renderChart()}
                 </div>
             </div>
@@ -80,5 +71,8 @@ class NewChordEntry extends Component {
 }
 
 export default connect(state => {
-    return ({ chordProperties: state.newChordProperties });
+    return ({
+        chordProperties: state.newChordProperties,
+        chord: state.newChordProperties.inProgressChord,
+    });
 })(NewChordEntry);
