@@ -27,11 +27,11 @@ function setDefaultFingerings(fingerings) {
 export class Chord {
     constructor(options) {
         const { instrument, fingerings, type, numStrings, tuning } = options;
-        this.instrument = instrument;
+        this.instrument = instrument.toLowerCase();
         this.tuning = tuning || '';
-        this.type = type;
+        this.type = type || '';
 
-        setInstrumentDefaultNumStrings(numStrings);
-        setDefaultFingerings(fingerings);
+        setInstrumentDefaultNumStrings.apply(this, numStrings);
+        setDefaultFingerings.apply(this, fingerings);
     }
 }
