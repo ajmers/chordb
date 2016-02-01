@@ -47,4 +47,11 @@ export default createReducer(initialState, {
             inProgressChord: chord,
         };
     },
+    ['FRET_ADDED']: (state, action) => {
+        const { numFrets } = action.data;
+        return {
+            ...state,
+            numFrets,
+        };
+    },
 });

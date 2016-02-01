@@ -47,3 +47,10 @@ export function stringMarkerClicked(stringIndex, isPlayed, chord) {
         data: { chord: updatedChord },
     };
 }
+
+export function addFretClicked(length) {
+    return {
+        type: 'FRET_ADDED',
+        data: { numFrets: length },
+    };
+}
