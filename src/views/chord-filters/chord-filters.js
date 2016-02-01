@@ -6,19 +6,12 @@ import { filterChanged } from '../../state/actions/filter-actions';
 import './chord-filters.scss';
 
 const filterOptions = [instrumentOptions, tonicOptions, typeOptions];
+const allFilter = [{value: 'All', label: 'All'}];
 
 class ChordFilters extends Component {
     static propTypes = {
         filters: PropTypes.object,
     };
-
-    componentWillMount() {
-        // Add an 'All' option to each filter.
-        filterOptions.map(filter => {
-            filter.options.push({ value: 'All', label: 'All' });
-            filter.defaultValue = 'All';
-        });
-    }
 
     onFilterChange = (key, value) => {
         const { dispatch } = this.props;
@@ -34,7 +27,7 @@ class ChordFilters extends Component {
                     auto={true}
                     onChange={this.onFilterChange.bind(this, filter.name)}
                     label={filter.name}
-                    source={filter.options}
+                    source={allFilter.concat(filter.options)}
                     value={value || filter.defaultValue}
                   />
             </div>

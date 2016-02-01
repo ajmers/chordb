@@ -10,7 +10,10 @@ const defaultTunings = {
     banjo: ['G', 'D', 'G', 'B', 'D'],
 };
 
-let nameSet = false;
+const numericalWhitelist = ['minFret'];
+const unmodifiedStringWhitelist = ['name'];
+const stringWhitelist = ['instrument', 'tonic', 'type', 'tuning'];
+const affectsFingerings = ['fingerings', 'instrument'];
 
 function setInstrumentDefaultNumStrings(numStrings) {
     this.numStrings = numStrings || defaultNumStrings[this.instrument];
@@ -28,30 +31,39 @@ function setDefaultFingerings(fingerings) {
 }
 
 function updateChordName() {
-    if (!this.name || !nameSet) {
-        this.name = `${this.tonic || ''} ${this.type}` || '';
+    if (!this.name) {
+        this.name = `${this.tonic || ''} ${this.type || ''}` || '';
     }
 }
 
 export class Chord {
     constructor(options) {
-        const { instrument, fingerings, type, numStrings, tuning } = options;
-        this.instrument = instrument.toLowerCase();
-        this.tuning = tuning || '';
-        this.type = type || '';
+        const { numStrings, fingerings } = options;
+        this.update.call(this, options);
 
         setInstrumentDefaultNumStrings.apply(this, numStrings);
         setDefaultFingerings.apply(this, fingerings);
     }
 
     update = properties => {
+        let resetFingerings = false;
         Object.keys(properties).map(property => {
-            this[property] = properties[property].toLowerCase();
-            if (property === 'name') nameSet = true;
+            if (affectsFingerings.indexOf(property) > -1) {
+                resetFingerings = true;
+            }
+            if (numericalWhitelist.indexOf(property) > -1) {
+                this[property] = parseInt(properties[property]);
+            } else if (unmodifiedStringWhitelist.indexOf(property) > -1) {
+                this[property] = properties[property];
+            } else if (stringWhitelist.indexOf(property) > -1) {
+                this[property] = properties[property].toLowerCase();
+            }
         });
         updateChordName.apply(this);
-        setInstrumentDefaultNumStrings.apply(this);
-        setDefaultFingerings.apply(this);
+        if (resetFingerings) {
+            setInstrumentDefaultNumStrings.apply(this);
+            setDefaultFingerings.apply(this);
+        }
         return this;
     };
 
