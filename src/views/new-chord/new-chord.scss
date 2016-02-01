@@ -1,9 +1,22 @@
 .add-chord-region {
     font-family: Roboto;
     width: 50%;
-    .close-add-chord {
-        margin: 10px;
+    .new-chord__header {
+        display: flex;
+        justify-content: space-between;
     }
+    .new-chord__save {
+        right: 0;
+        top: 0px;
+        margin: 20px;
+    }
+
+    .new-chord__close {
+        margin: 20px;
+        left: 0px;
+        top: 0px;
+    }
+
     .new-chord-entry {
         padding: 10px;
     }

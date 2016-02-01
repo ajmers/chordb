@@ -3,6 +3,9 @@ import { Card, CardTitle, CardText } from 'react-toolbox/lib/card';
 import { Button } from 'react-toolbox/lib/button';
 import ChordChart from '../chord-chart/chord-chart';
 
+const flatSign = String.fromCharCode(0x266d);
+const sharpSign = String.fromCharCode(0x266f);
+
 import './chord-card.scss';
 
 export default class ChordCard extends Component {
@@ -33,6 +36,12 @@ export default class ChordCard extends Component {
         ) : '';
     };
 
+    renderChordName(name) {
+        let modifiedName = name.replace(/\#/g, sharpSign);
+        modifiedName = modifiedName.replace(/b\b/g, flatSign);
+        return modifiedName;
+    }
+
     render() {
         const { chord, numFrets } = this.props;
         const totalFrets =
@@ -40,7 +49,7 @@ export default class ChordCard extends Component {
         return (
             <Card className='chord-card'>
                 <CardTitle className='chord-title'>
-                    <div className='chord-name'>{chord.name}</div>
+                    <div className='chord-name'>{this.renderChordName(chord.name)}</div>
                 </CardTitle>
                 <ChordChart chord={chord}
                     numFrets={totalFrets}/>

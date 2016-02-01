@@ -1,24 +1,36 @@
 import React, { Component, PropTypes } from 'react';
-import Dropdown from 'react-toolbox/lib/dropdown';
 import { Button } from 'react-toolbox/lib/button';
+import Input from 'react-toolbox/lib/input';
+import Dropdown from 'react-toolbox/lib/dropdown';
 import { connect } from 'react-redux';
+import { validateChord } from '../../state/reducers/new-chord-selector';
 import { instrumentOptions, tonicOptions, typeOptions } from '../../constants/chord-options';
 
 import ChordCard from '../../components/chord-card/chord-card';
-import { chordPropertyUpdated, fretClicked, stringMarkerClicked, addFretClicked } from '../../state/actions/add-chord-actions';
+import {
+    chordSaved,
+    chordPropertyUpdated,
+    fretClicked,
+    stringMarkerClicked,
+    addFretClicked,
+    minFretChanged } from '../../state/actions/add-chord-actions';
+import { addChordClosed } from '../../state/actions/app-actions';
 import './new-chord.scss';
 
 const chordOptions = [instrumentOptions, tonicOptions, typeOptions];
+const chooseOneOption = [{ label: 'Choose one', value: 'Choose one' }];
 
 class NewChordEntry extends Component {
     static propTypes = {
         chordProperties: PropTypes.object,
         chord: PropTypes.object,
         numFrets: PropTypes.number,
+        chordCanSave: PropTypes.bool,
     };
 
     static childContextTypes = {
         onFretClick: PropTypes.func,
+        onMinFretChange: PropTypes.func,
         onStringMarkerClick: PropTypes.func,
         isEditable: PropTypes.bool,
         onAddFretClick: PropTypes.func,
@@ -27,21 +39,25 @@ class NewChordEntry extends Component {
     getChildContext() {
         return { onFretClick: this.onFretClick,
             isEditable: true,
+            onMinFretChange: this.onMinFretChange,
             onStringMarkerClick: this.onStringMarkerClick,
             onAddFretClick: this.onAddFretClick,
         };
     }
 
-    componentWillMount() {
-        chordOptions.map(option => {
-            option.options.push({ value: 'Choose one', label: 'Choose one' });
-            option.defaultValue = 'Choose one';
-        });
-    }
+    onMinFretChange = (value) => {
+        const { dispatch, chord } = this.props;
+        dispatch(minFretChanged(chord, value));
+    };
 
     onFretClick = (string, fret, reset) => {
         const { dispatch, chord } = this.props;
         dispatch(fretClicked(string, fret, chord, reset));
+    };
+
+    onNameUpdated = value => {
+        const { dispatch, chord } = this.props;
+        dispatch(chordPropertyUpdated('name', value, chord));
     };
 
     onStringMarkerClick = (stringIndex, isPlayed) => {
@@ -59,6 +75,16 @@ class NewChordEntry extends Component {
         dispatch(chordPropertyUpdated(key, value, chord));
     };
 
+    handleDrawerClick = e => {
+        const { dispatch } = this.props;
+        dispatch(addChordClosed());
+    };
+
+    handleChordSaved = () => {
+        const { dispatch, chord } = this.props;
+        dispatch(chordSaved(chord));
+    };
+
     renderPicker = (picker, index) => {
         const { chordProperties: chordProps } = this.props;
         // Don't render pickers besides instrument until instrument is chosen.
@@ -72,7 +98,7 @@ class NewChordEntry extends Component {
                     auto={true}
                     onChange={this.onPickerChange.bind(this, picker.name)}
                     label={picker.name}
-                    source={picker.options}
+                    source={chooseOneOption.concat(picker.options)}
                     value={value || picker.defaultValue}
                   />
             </div>
@@ -89,8 +115,29 @@ class NewChordEntry extends Component {
     };
 
     render() {
+        const { chordCanSave, chordProperties = {} } = this.props;
+        const { name = '' } = chordProperties;
         return (
             <div className='new-chord-entry'>
+                <div className='new-chord__header'>
+                    <Button className='new-chord__close'
+                        onClick={this.handleDrawerClick}
+                        icon='close' inverted mini floating />
+
+                    <Input className='new-chord__name'
+                        onChange={this.onNameUpdated}
+                        label='Chord name'
+                        value={name}
+                    />
+
+                    {chordCanSave ? (
+                        <Button className='new-chord__save'
+                            icon='save'
+                            onClick={this.handleChordSaved}
+                            label='Save'
+                            flat primary />) : ''}
+                </div>
+
                 <div className='new-chord__options'>
                     {chordOptions.map(this.renderPicker)}
                 </div>
@@ -104,6 +151,7 @@ class NewChordEntry extends Component {
 
 export default connect(state => {
     return ({
+        chordCanSave: validateChord(state),
         chordProperties: state.newChordProperties,
         chord: state.newChordProperties.inProgressChord,
         numFrets: state.newChordProperties.numFrets,

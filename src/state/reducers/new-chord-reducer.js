@@ -5,9 +5,15 @@ const initialState = {
     tonic: 'Choose one',
     type: 'Choose one',
     instrumentChosen: false,
+    inProgressChord: null,
 };
 
 export default createReducer(initialState, {
+    ['CHORD_SAVED']: (state, action) => {
+        return {
+            ...initialState,
+        };
+    },
     ['INSTRUMENT_UPDATED']: (state, action) => {
         const { chord } = action.data;
         return {
@@ -22,6 +28,14 @@ export default createReducer(initialState, {
         return {
             ...state,
             type: chord.type,
+            inProgressChord: chord,
+        };
+    },
+    ['NAME_UPDATED']: (state, action) => {
+        const { chord } = action.data;
+        return {
+            ...state,
+            name: chord.name,
             inProgressChord: chord,
         };
     },
@@ -52,6 +66,13 @@ export default createReducer(initialState, {
         return {
             ...state,
             numFrets,
+        };
+    },
+    ['MIN_FRET_CHANGED']: (state, action) => {
+        const { chord } = action.data;
+        return {
+            ...state,
+            inProgressChord: chord,
         };
     },
 });
