@@ -1,6 +1,7 @@
 .instrument-string {
     display: flex;
     height: 100%;
+    width: 20px;
     flex: 1;
     flex-direction: column;
     border-left: 1px solid black;
@@ -42,7 +43,7 @@
             z-index: 2;
         }
     }
-    &:first-child {
+    &:first-of-type{
         border-left: none;
         & .fret {
             border-top: none;

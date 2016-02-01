@@ -33,6 +33,13 @@ export default createReducer(initialState, {
             inProgressChord: chord,
         };
     },
+    ['STRING_MARKER_CLICKED']: (state, action) => {
+        const { chord } = action.data;
+        return {
+            ...state,
+            inProgressChord: chord,
+        };
+    },
     ['FRET_CLICKED']: (state, action) => {
         const { chord } = action.data;
         return {

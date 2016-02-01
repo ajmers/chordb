@@ -10,18 +10,13 @@ export default class ChordChart extends Component {
         }));
     }
 
-    getMinFret(chord) {
-        return Math.min.apply(null, chord.fingerings.map(string => {
-            return typeof string.fret === 'number' ? string.fret : null;
-        }).filter(fret => !!fret));
-    }
-
     render() {
         const { chord } = this.props;
         const maxFret = this.getMaxFret(chord);
-        const minFret = chord.minFret || this.getMinFret(chord);
+        const { minFret } = chord;
         return (
             <div className='chord-chart'>
+                <span className='chord__min-fret'>{minFret ? minFret + 'fr' : ''}</span>
                 {chord.fingerings.map((string, i) => {
                     return (<InstString key={i}
                         stringIndex={i}
