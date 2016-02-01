@@ -7,6 +7,7 @@ import ChordCard from '../components/chord-card/chord-card';
 import { Button } from 'react-toolbox/lib/button';
 import Drawer from 'react-toolbox/lib/drawer';
 
+import { SongSheet } from './song-sheet/song-sheet';
 import NewChordEntry from './new-chord/new-chord';
 import ChordFilters from './chord-filters/chord-filters';
 
@@ -33,6 +34,7 @@ class AppWrapper extends Component {
 
     render() {
         const { filteredChords: chords = [], addChordOpen } = this.props;
+        console.log(SongSheet);
         return (
             <div>
                 <div className='controls'>
@@ -52,6 +54,12 @@ class AppWrapper extends Component {
                     className='add-chord-region'
                     onOverlayClick={this.handleDrawerClick}>
                         <NewChordEntry {...this.props} />
+                </Drawer>
+
+                <Drawer active={!addChordOpen}
+                    type='left'
+                    >
+                    <SongSheet/>
                 </Drawer>
 
                 <div className='chords'>
