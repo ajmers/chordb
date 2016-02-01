@@ -1,6 +1,5 @@
 .instrument-string {
     display: flex;
-    height: 100%;
     width: 20px;
     flex: 1;
     flex-direction: column;
@@ -23,7 +22,7 @@
             border-top: 2px solid black;
         }
         .dot {
-            top: 12px;
+            top: 8px;
             color: white;
             font-size: 9px;
             text-align: center;
@@ -33,7 +32,7 @@
             width: 15px;
             border-radius: 15px;
             position: absolute;
-            left: 73%;
+            left: 70%;
         }
         .fret__click-area {
             position: absolute;

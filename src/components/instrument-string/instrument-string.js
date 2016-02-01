@@ -4,7 +4,7 @@ import './instrument-string.scss';
 export default class InstrumentString extends Component {
     static propTypes = {
         stringIndex: PropTypes.number,
-        maxFret: PropTypes.number,
+        numFrets: PropTypes.number,
         minFret: PropTypes.number,
         string: PropTypes.shape({
             finger: PropTypes.number,
@@ -38,8 +38,7 @@ export default class InstrumentString extends Component {
     }
 
     render() {
-        const { maxFret, minFret, string: { finger, fret }, stringIndex } = this.props;
-        console.log(maxFret);
+        const { numFrets, minFret, string: { finger, fret }, stringIndex } = this.props;
         const { isEditable, onStringMarkerClick } = this.context;
         const isPlayed = fret !== 'X';
         const stringMarkerClickHandler = isEditable ?
@@ -52,7 +51,7 @@ export default class InstrumentString extends Component {
         const stringMarker = isPlayed ? (isFretted ? '' : 'O') : 'X';
         const stringClass = frettedClass || playedClass;
 
-        const fretArray = new Array(Math.max(maxFret, 4));
+        const fretArray = new Array(Math.max(numFrets, 4));
         fretArray.fill(0);
         return (
             <div className='instrument-string'>
