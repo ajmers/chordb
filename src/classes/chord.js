@@ -54,4 +54,11 @@ export class Chord {
         setDefaultFingerings.apply(this);
         return this;
     };
+
+    setStringFingering = (stringIndex, fret) => {
+        const { string } = this.fingerings[stringIndex];
+        const newString = { string, fret };
+        this.fingerings.splice(stringIndex, 1, newString);
+        return this;
+    };
 }

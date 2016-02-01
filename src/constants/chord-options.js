@@ -1,18 +1,18 @@
 export const instrumentOptions = {
     name: 'instrument',
     options: [
-        { value: 'Guitar', label: 'Guitar' },
-        { value: 'Mandolin', label: 'Mandolin' },
+        { value: 'guitar', label: 'Guitar' },
+        { value: 'mandolin', label: 'Mandolin' },
     ],
 };
 
 export const typeOptions = {
     name: 'type',
     options: [
-        { value: 'Major', label: 'Major' },
-        { value: 'Minor', label: 'Minor' },
-        { value: 'Diminished', label: 'Diminished' },
-        { value: 'Augmented', label: 'Augmented' },
+        { value: 'major', label: 'Major' },
+        { value: 'minor', label: 'Minor' },
+        { value: 'diminished', label: 'Diminished' },
+        { value: 'augmented', label: 'Augmented' },
         { value: '7', label: '7' },
         { value: '6', label: '6' },
     ],
@@ -21,19 +21,19 @@ export const typeOptions = {
 export const tonicOptions = {
     name: 'tonic',
     options: [
-        { value: 'C', label: 'C' },
-        { value: 'C#', label: 'C#' },
-        { value: 'D', label: 'D' },
-        { value: 'D#', label: 'D#' },
-        { value: 'Eb', label: 'Eb' },
-        { value: 'E', label: 'E' },
-        { value: 'F', label: 'F' },
-        { value: 'F#', label: 'F#' },
-        { value: 'G', label: 'G' },
-        { value: 'G#', label: 'G#' },
-        { value: 'Ab', label: 'Ab' },
-        { value: 'A', label: 'A' },
-        { value: 'Bb', label: 'Bb' },
-        { value: 'B', label: 'B' },
+        { value: 'c', label: 'C' },
+        { value: 'c#', label: 'C#' },
+        { value: 'd', label: 'D' },
+        { value: 'd#', label: 'D#' },
+        { value: 'eb', label: 'Eb' },
+        { value: 'e', label: 'E' },
+        { value: 'f', label: 'F' },
+        { value: 'f#', label: 'F#' },
+        { value: 'g', label: 'G' },
+        { value: 'g#', label: 'G#' },
+        { value: 'ab', label: 'Ab' },
+        { value: 'a', label: 'A' },
+        { value: 'bb', label: 'Bb' },
+        { value: 'b', label: 'B' },
     ],
 };

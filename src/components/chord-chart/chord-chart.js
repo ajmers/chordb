@@ -6,7 +6,7 @@ import './chord-chart.scss';
 export default class ChordChart extends Component {
     getMaxFret(chord) {
         return Math.max.apply(null, chord.fingerings.map(string => {
-            return typeof string.fret === 'number' ? string.fret : 0;
+            return parseInt(string.fret) ? string.fret : 0;
         }));
     }
 
@@ -24,6 +24,7 @@ export default class ChordChart extends Component {
             <div className='chord-chart'>
                 {chord.fingerings.map((string, i) => {
                     return (<InstString key={i}
+                        stringIndex={i}
                         string={string}
                         maxFret={maxFret}
                         minFret={minFret}
