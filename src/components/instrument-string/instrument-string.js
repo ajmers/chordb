@@ -3,7 +3,8 @@ import './instrument-string.scss';
 
 export default class InstrumentString extends Component {
     static propTypes = {
-        maxFret: PropTypes.number,
+        stringIndex: PropTypes.number,
+        numFrets: PropTypes.number,
         minFret: PropTypes.number,
         string: PropTypes.shape({
             finger: PropTypes.number,
@@ -11,31 +12,55 @@ export default class InstrumentString extends Component {
         }),
     };
 
-    renderFret(isFretted, finger, index) {
+    static contextTypes = {
+        onFretClick: PropTypes.func,
+        onStringMarkerClick: PropTypes.func,
+        isEditable: PropTypes.bool,
+    };
+
+    onFretClicked = (fret, stringIndex, isFretted, e) => {
+        const { onFretClick } = this.context;
+        onFretClick(stringIndex, fret, isFretted);
+    };
+
+    renderFret(isFretted, finger, index, clickableFrets) {
+        const { stringIndex } = this.props;
+        const { isEditable } = this.context;
         const frettedClass = isFretted ? 'mark' : '';
         return (
             <div className={`fret ${frettedClass}`} key={index}>
+                {isEditable ? <span className='fret__click-area'
+                    onClick={this.onFretClicked.bind(this, index + 1, stringIndex, isFretted)}
+                    ></span> : '' }
                 {isFretted ? <div className='dot'>{finger}</div> : ''}
             </div>
         );
     }
 
     render() {
-        const { maxFret, minFret, string: { finger, fret } } = this.props;
+        const { numFrets, minFret, string: { finger, fret }, stringIndex } = this.props;
+        const { isEditable, onStringMarkerClick } = this.context;
+        const isPlayed = fret !== 'X';
+        const stringMarkerClickHandler = isEditable ?
+            onStringMarkerClick.bind(this, stringIndex, !isPlayed) : null;
 
-        const unfrettedClass = fret === 0 ? 'no-fret' : '';
-        const unplayedClass = fret === 'X' ? 'unplayed' : '';
-        const fretClass = !(unfrettedClass || unplayedClass) ?
-            `fret-${fret}` : '';
+        const isFretted = parseInt(fret) !== 0;
 
-        const fretArray = new Array(Math.max(maxFret, 4));
+        const frettedClass = isFretted ? '' : 'no-fret';
+        const playedClass = isPlayed ? '' : 'unplayed';
+        const stringMarker = isPlayed ? (isFretted ? '' : 'O') : 'X';
+        const stringClass = frettedClass || playedClass;
+
+        const fretArray = new Array(Math.max(numFrets, 4));
         fretArray.fill(0);
         return (
-            <div className={`instrument-string ${fretClass}
-                    ${unplayedClass} ${unfrettedClass}`}>
+            <div className='instrument-string'>
+                <span className={stringClass}
+                    onClick={stringMarkerClickHandler}
+                    >{stringMarker}</span>
                 {fretArray.map((fretI, index) => {
-                    const isFretted = (index === fret - 1) && !unfrettedClass;
-                    return this.renderFret(isFretted, finger, index);
+                    const fretted = (index === fret - 1) && isFretted;
+                    return this.renderFret(fretted, finger, index);
                 })}
             </div>
         );

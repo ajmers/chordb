@@ -66,11 +66,12 @@ router.route('/chords')
     .post(function(req, res) {
         var chord = new Chord(req.body);      // create a new instance of the Chord model
         // save the bear and check for errors
-        chord.save(function(err) {
+        console.log(chord);
+        chord.save(function(err, savedChord, numAffected) {
             if (err)
                 res.send(err);
 
-            res.json({ message: 'Chord created!' });
+            res.json({ savedChord });
         });
     })
     .get(function(req, res) {

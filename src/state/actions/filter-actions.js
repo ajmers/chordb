@@ -1,26 +1,15 @@
-export function instrumentFilterChanged(value) {
-    return {
-        type: 'INSTRUMENT_FILTERED',
-        data: {
-            instrument: value,
-        },
-    };
-}
+const typeLookup = {
+    instrument: 'INSTRUMENT_FILTERED',
+    type: 'TYPE_FILTERED',
+    tonic: 'TONIC_FILTERED',
+};
 
-export function typeFilterChanged(value) {
+export function filterChanged(key, value) {
+    const actionType = typeLookup[key];
     return {
-        type: 'TYPE_FILTERED',
+        type: actionType,
         data: {
-            type: value,
-        },
-    };
-}
-
-export function tonicFilterChanged(value) {
-    return {
-        type: 'TONIC_FILTERED',
-        data: {
-            tonic: value,
+            [key]: value,
         },
     };
 }

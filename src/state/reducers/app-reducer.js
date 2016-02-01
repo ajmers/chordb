@@ -11,6 +11,12 @@ export default createReducer(initialState, {
             addChordOpen: true,
         };
     },
+    ['CHORD_SAVED']: (state, action) => {
+        return {
+            ...state,
+            addChordOpen: false,
+        };
+    },
     ['ADD_CHORD_CLOSED']: (state, action) => {
         return {
             ...state,
