@@ -1,0 +1,44 @@
+.add-chord-region {
+    font-family: Roboto;
+    width: 50%;
+    .new-chord__header {
+        display: flex;
+        justify-content: space-between;
+    }
+    .new-chord__save {
+        right: 0;
+        top: 0px;
+        margin: 20px;
+    }
+
+    .new-chord__close {
+        margin: 20px;
+        left: 0px;
+        top: 0px;
+    }
+
+    .new-chord-entry {
+        padding: 10px;
+    }
+    .new-chord__options {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .search-filter {
+        padding: 10px;
+        width: 25%;
+        &__dropdown {
+            ul {
+                padding-left: 0px;
+            }
+            input {
+                font-size: 1rem;
+            }
+        }
+    }
+    .new-chord__grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}

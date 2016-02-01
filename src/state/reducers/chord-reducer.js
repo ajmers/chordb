@@ -7,4 +7,10 @@ export default createReducer(initialState, {
         const { chords: fetchedChords } = action.data;
         return fetchedChords;
     },
+    ['CHORD_SAVED']: (state, action) => {
+        const { savedChord: chord } = action.data;
+        const chords = Object.assign([], state);
+        chords.push(chord);
+        return chords;
+    },
 });

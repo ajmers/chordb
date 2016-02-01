@@ -1,20 +1,21 @@
 import React, { Component, PropTypes } from 'react';
 import Dropdown from 'react-toolbox/lib/dropdown';
 import { connect } from 'react-redux';
-import { instrumentFilter, tonicFilter, typeFilter } from './filter-options';
+import { instrumentOptions, tonicOptions, typeOptions } from '../../constants/chord-options';
+import { filterChanged } from '../../state/actions/filter-actions';
+import './chord-filters.scss';
 
-import './chord-filter.scss';
-
-const filterOptions = [instrumentFilter, tonicFilter, typeFilter];
+const filterOptions = [instrumentOptions, tonicOptions, typeOptions];
+const allFilter = [{value: 'All', label: 'All'}];
 
 class ChordFilters extends Component {
     static propTypes = {
         filters: PropTypes.object,
     };
 
-    onFilterChange = (handler, value) => {
+    onFilterChange = (key, value) => {
         const { dispatch } = this.props;
-        dispatch(handler(value));
+        dispatch(filterChanged(key, value));
     };
 
     renderFilter = (filter, index) => {
@@ -24,9 +25,9 @@ class ChordFilters extends Component {
             <div className='search-filter' key={index}>
                 <Dropdown
                     auto={true}
-                    onChange={this.onFilterChange.bind(this, filter.onChange)}
+                    onChange={this.onFilterChange.bind(this, filter.name)}
                     label={filter.name}
-                    source={filter.options}
+                    source={allFilter.concat(filter.options)}
                     value={value || filter.defaultValue}
                   />
             </div>

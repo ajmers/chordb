@@ -1,53 +1,58 @@
-.instrument-string {
+.chord-chart__strings {
     display: flex;
-    flex: 1;
-    flex-direction: column;
-    border-left: 1px solid black;
-    position: relative;
-    &.unplayed:before {
-        font-family: arial;
-        content: 'x';
-        position: absolute;
-        top: -18%;
-        left: 70%;
-    }
-    &.no-fret:before {
-        font-family: arial;
-        content: 'o';
-        position: absolute;
-        top: -18%;
-        left: 70%;
-    }
-    .fret {
-        position: relative;
+    .instrument-string {
+        display: flex;
+        width: 20px;
         flex: 1;
-        height: 30px;
-        border-bottom: 1px solid black;
-        &:first-child {
-            border-top: 2px solid black;
-        }
-        .dot {
-            top: 7px;
-            color: white;
-            font-size: 9px;
-            text-align: center;
-            line-height: 15px;
-            background-color: black;
-            height: 15px;
-            width: 15px;
-            border-radius: 15px;
+        flex-direction: column;
+        border-left: 1px solid black;
+        position: relative;
+        .unplayed, .no-fret {
+            font-family: Roboto;
             position: absolute;
-            left: 65%;
+            top: -20px;
+            left: 70%;
+            font-size: .75em;
         }
-    }
-    &:first-child {
-        border-left: none;
-        & .fret {
-            border-top: none;
-            border-bottom: none;
+        .fret {
+            position: relative;
+            flex: 1;
+            display: flex;
+            height: 30px;
+            border-bottom: 1px solid black;
+            &:first-of-type{
+                border-top: 2px solid black;
+            }
+            .dot {
+                top: 8px;
+                color: white;
+                font-size: 9px;
+                text-align: center;
+                line-height: 15px;
+                background-color: black;
+                height: 15px;
+                width: 15px;
+                border-radius: 15px;
+                position: absolute;
+                left: 70%;
+            }
+            .fret__click-area {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                left: 50%;
+                z-index: 2;
+            }
         }
-    }
-    &:last-child {
-        border-right: 1px solid black;
+        &:first-of-type{
+            border-left: none;
+            & .fret {
+                border-top: none;
+                border-bottom: none;
+            }
+        }
+        &:last-child {
+            border-right: 1px solid black;
+        }
     }
 }

@@ -1,0 +1,28 @@
+.chord-chart {
+    display: flex;
+    position: relative;
+    align-self: center;
+    padding: 30px;
+    .chord__min-fret {
+        font-size: .75em;
+        position: absolute;
+        left: 20px;
+    }
+    .chord__min-fret-input {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        position: absolute;
+        font-size: .75rem;
+
+        left: 20px;
+        top: 30px;
+
+        width: 20px;
+        padding: 0;
+        input {
+            padding: 0;
+            text-align: right;
+        }
+    }
+}
