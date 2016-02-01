@@ -14,6 +14,7 @@ export default class InstrumentString extends Component {
 
     static contextTypes = {
         onFretClick: PropTypes.func,
+        onStringMarkerClick: PropTypes.func,
         isEditable: PropTypes.bool,
     };
 
@@ -24,10 +25,11 @@ export default class InstrumentString extends Component {
 
     renderFret(isFretted, finger, index, clickableFrets) {
         const { stringIndex } = this.props;
+        const { isEditable } = this.context;
         const frettedClass = isFretted ? 'mark' : '';
         return (
             <div className={`fret ${frettedClass}`} key={index}>
-                {clickableFrets ? <span className='fret__click-area'
+                {isEditable ? <span className='fret__click-area'
                     onClick={this.onFretClicked.bind(this, index + 1, stringIndex, isFretted)}
                     ></span> : '' }
                 {isFretted ? <div className='dot'>{finger}</div> : ''}
@@ -36,12 +38,13 @@ export default class InstrumentString extends Component {
     }
 
     render() {
-        const { maxFret, minFret, string: { finger, fret } } = this.props;
+        const { maxFret, minFret, string: { finger, fret }, stringIndex } = this.props;
         console.log(maxFret);
-        const { onFretClick } = this.context;
-        const clickableFrets = !!onFretClick;
-
+        const { isEditable, onStringMarkerClick } = this.context;
         const isPlayed = fret !== 'X';
+        const stringMarkerClickHandler = isEditable ?
+            onStringMarkerClick.bind(this, stringIndex, !isPlayed) : null;
+
         const isFretted = parseInt(fret) !== 0;
 
         const frettedClass = isFretted ? '' : 'no-fret';
@@ -53,10 +56,12 @@ export default class InstrumentString extends Component {
         fretArray.fill(0);
         return (
             <div className='instrument-string'>
-                <span className={stringClass}>{stringMarker}</span>
+                <span className={stringClass}
+                    onClick={stringMarkerClickHandler}
+                    >{stringMarker}</span>
                 {fretArray.map((fretI, index) => {
                     const fretted = (index === fret - 1) && isFretted;
-                    return this.renderFret(fretted, finger, index, clickableFrets);
+                    return this.renderFret(fretted, finger, index);
                 })}
             </div>
         );

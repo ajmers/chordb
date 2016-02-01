@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { instrumentOptions, tonicOptions, typeOptions } from '../../constants/chord-options';
 
 import ChordCard from '../../components/chord-card/chord-card';
-import { chordPropertyUpdated, fretClicked } from '../../state/actions/add-chord-actions';
+import { chordPropertyUpdated, fretClicked, stringMarkerClicked } from '../../state/actions/add-chord-actions';
 import './new-chord.scss';
 
 const chordOptions = [instrumentOptions, tonicOptions, typeOptions];
@@ -17,6 +17,7 @@ class NewChordEntry extends Component {
 
     static childContextTypes = {
         onFretClick: PropTypes.func,
+        onStringMarkerClick: PropTypes.func,
         isEditable: PropTypes.bool,
     };
 
@@ -25,8 +26,16 @@ class NewChordEntry extends Component {
         dispatch(fretClicked(string, fret, chord, reset));
     };
 
+    onStringMarkerClick = (stringIndex, isPlayed) => {
+        const { dispatch, chord } = this.props;
+        dispatch(stringMarkerClicked(stringIndex, isPlayed, chord));
+    };
+
     getChildContext() {
-        return { onFretClick: this.onFretClick, isEditable: true };
+        return { onFretClick: this.onFretClick,
+            isEditable: true,
+            onStringMarkerClick: this.onStringMarkerClick,
+        };
     }
 
     componentWillMount() {

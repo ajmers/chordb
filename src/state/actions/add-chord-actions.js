@@ -38,3 +38,12 @@ export function fretClicked(stringIndex, fret, chord, reset) {
         data: { chord: updatedChord },
     };
 }
+
+export function stringMarkerClicked(stringIndex, isPlayed, chord) {
+    const fret = isPlayed ? '0' : 'X';
+    const updatedChord = updateFingering(chord, stringIndex, fret);
+    return {
+        type: 'STRING_MARKER_CLICKED',
+        data: { chord: updatedChord },
+    };
+}
