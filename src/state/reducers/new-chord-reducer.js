@@ -1,5 +1,4 @@
 import createReducer from '../../utils/create-reducer';
-import { Chord } from '../../classes/chord';
 
 const initialState = {
     instrument: 'Choose one',
@@ -8,43 +7,37 @@ const initialState = {
     instrumentChosen: false,
 };
 
-function updateChord(inProgressChord, chordProps) {
-    let chord;
-    if (!inProgressChord) {
-        chord = new Chord(chordProps);
-    } else {
-        chord = inProgressChord.update(chordProps);
-    }
-    return chord;
-}
-
 export default createReducer(initialState, {
     ['INSTRUMENT_UPDATED']: (state, action) => {
-        const { instrument } = action.data;
-        const chord = updateChord(state.inProgressChord, { instrument });
+        const { chord } = action.data;
         return {
             ...state,
-            instrument,
+            instrument: chord.instrument,
             inProgressChord: chord,
-            instrumentChosen: instrument !== 'Choose one',
+            instrumentChosen: chord.instrument !== 'Choose one',
         };
     },
     ['TYPE_UPDATED']: (state, action) => {
-        const { type } = action.data;
-        const chord = updateChord(state.inProgressChord, { type });
+        const { chord } = action.data;
         return {
             ...state,
+            type: chord.type,
             inProgressChord: chord,
-            type,
         };
     },
     ['TONIC_UPDATED']: (state, action) => {
-        const { tonic } = action.data;
-        const chord = updateChord(state.inProgressChord, { tonic });
+        const { chord } = action.data;
+        return {
+            ...state,
+            tonic: chord.tonic,
+            inProgressChord: chord,
+        };
+    },
+    ['FRET_CLICKED']: (state, action) => {
+        const { chord } = action.data;
         return {
             ...state,
             inProgressChord: chord,
-            tonic,
         };
     },
 });

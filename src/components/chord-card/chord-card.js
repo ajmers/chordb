@@ -7,7 +7,6 @@ import './chord-card.scss';
 export default class ChordCard extends Component {
     static propTypes = {
         chord: PropTypes.object,
-        isEditable: PropTypes.bool,
     };
 
     render() {

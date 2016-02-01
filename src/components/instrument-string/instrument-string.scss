@@ -5,30 +5,24 @@
     flex-direction: column;
     border-left: 1px solid black;
     position: relative;
-    &.unplayed:before {
-        font-family: arial;
-        content: 'x';
+    .unplayed, .no-fret {
+        font-family: Roboto;
         position: absolute;
-        top: -18%;
+        top: -20px;
         left: 70%;
-    }
-    &.no-fret:before {
-        font-family: arial;
-        content: 'o';
-        position: absolute;
-        top: -18%;
-        left: 70%;
+        font-size: .75em;
     }
     .fret {
         position: relative;
         flex: 1;
+        display: flex;
         height: 30px;
         border-bottom: 1px solid black;
-        &:first-child {
+        &:first-of-type{
             border-top: 2px solid black;
         }
         .dot {
-            top: 7px;
+            top: 12px;
             color: white;
             font-size: 9px;
             text-align: center;
@@ -38,7 +32,14 @@
             width: 15px;
             border-radius: 15px;
             position: absolute;
-            left: 65%;
+            left: 73%;
+        }
+        .fret__click-area {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            left: 50%;
+            z-index: 2;
         }
     }
     &:first-child {
