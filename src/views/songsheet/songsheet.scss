@@ -1,0 +1,32 @@
+.songsheet-region {
+    $this: &;
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+    background-color: darkgray;
+    transition: flex-grow 1000ms linear;
+
+    &--closed {
+        flex-grow: .0001;
+        transition: flex-grow 1000ms linear;
+        #{$this}__new-song, #{$this}__header {
+            display: none;
+        }
+    }
+    &__header {
+        display: flex;
+        justify-content: flex-end;
+    }
+    &__close, &__add-song {
+        margin: 20px 10px;
+    }
+
+    &__new-song {
+        flex: 1;
+        background-color: white;
+        margin: 10px;
+        .new-song__title {
+            margin: 10px;
+        }
+    }
+}
