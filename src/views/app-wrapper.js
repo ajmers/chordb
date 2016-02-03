@@ -7,8 +7,8 @@ import ChordCard from '../components/chord-card/chord-card';
 import { Button } from 'react-toolbox/lib/button';
 import Drawer from 'react-toolbox/lib/drawer';
 
-import { Draggable, DropTarget } from '../utils/drag-and-drop';
-
+// import { Draggable, DropTarget } from '../utils/drag-and-drop';
+import Draggable from 'react-draggable';
 import Songsheet from './songsheet/songsheet';
 import NewChordEntry from './new-chord/new-chord';
 import ChordFilters from './chord-filters/chord-filters';
@@ -25,6 +25,16 @@ class AppWrapper extends Component {
         filteredChords: PropTypes.arrayOf(PropTypes.object),
         songsheetsAreOpen: PropTypes.bool,
     };
+
+    constructor() {
+        super();
+        this.state = {
+            deltaPosition: {
+                top: 0, left: 0,
+            },
+            activeDrags: 0,
+        };
+    }
 
     componentWillMount() {
         const { dispatch } = this.props;
@@ -51,13 +61,40 @@ class AppWrapper extends Component {
             </div>);
     };
 
+    handleStart() {
+        console.log('start dragging');
+    }
+
+
+    handleDrag = (e, ui) => {
+        var {left, top} = this.state.deltaPosition;
+        this.setState({
+            deltaPosition: {
+                left: left + ui.deltaX,
+                top: top + ui.deltaY,
+            }
+        });
+    };
+
+    handleStop() {
+        console.log('stop dragging');
+    }
+
     renderChord = (chord, index) => {
         const { addingSong } = this.props;
+        const style = {
+            width: 20,
+            height: 20,
+            backgroundColor: 'lightblue',
+        };
         return addingSong ?
-            ( <Draggable className='draggable-chord'
-                    onDragStop={() => {console.log('DROPPED');}}
-                    key={index}>
-                <ChordCard
+            ( <Draggable
+                key={index}
+				zIndex={100}
+				onStart={this.handleStart}
+				onDrag={this.handleDrag}
+				onStop={this.handleStop}>
+                <ChordCard className='draggable-chord'
                     chord={chord} key={index}/>
             </Draggable> ) : (
             <ChordCard
