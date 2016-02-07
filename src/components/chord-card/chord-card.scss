@@ -1,6 +1,7 @@
 .chord-card {
     max-width: 250px;
     margin: 10px;
+    position: relative;
     display: flex;
     align-items: center;
     .chord-details {
@@ -9,5 +10,9 @@
     }
     .chord-name {
         font-weight: bold;
+    }
+    .drag-handle {
+        width: 100%;
+        text-align: center;
     }
 }

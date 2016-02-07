@@ -17,6 +17,17 @@
         align-items: flex-start;
         flex-wrap: wrap;
     }
+    .draggable-chord-container {
+        position: relative;
+        margin: 10px;
+    }
+
+    .drag-handle {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        z-index: 5;
+    }
     .draggable-chord {
         max-width: 250px;
         margin: 10px;

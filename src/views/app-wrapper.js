@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { filteredChordSelector } from '../state/reducers/chord-selector';
 
@@ -7,8 +8,8 @@ import ChordCard from '../components/chord-card/chord-card';
 import { Button } from 'react-toolbox/lib/button';
 import Drawer from 'react-toolbox/lib/drawer';
 
-// import { Draggable, DropTarget } from '../utils/drag-and-drop';
-import Draggable from 'react-draggable';
+import { Draggable, DropTarget } from '../utils/drag-and-drop';
+//import Draggable from 'react-draggable';
 import Songsheet from './songsheet/songsheet';
 import NewChordEntry from './new-chord/new-chord';
 import ChordFilters from './chord-filters/chord-filters';
@@ -61,11 +62,6 @@ class AppWrapper extends Component {
             </div>);
     };
 
-    handleStart() {
-        console.log('start dragging');
-    }
-
-
     handleDrag = (e, ui) => {
         var {left, top} = this.state.deltaPosition;
         this.setState({
@@ -76,8 +72,8 @@ class AppWrapper extends Component {
         });
     };
 
-    handleStop() {
-        console.log('stop dragging');
+    handleStop(chord) {
+        console.log('stop dragging', chord);
     }
 
     renderChord = (chord, index) => {
@@ -88,14 +84,14 @@ class AppWrapper extends Component {
             backgroundColor: 'lightblue',
         };
         return addingSong ?
-            ( <Draggable
+            ( <Draggable className='draggable-chord-container'
+                ref={`draggable-chord-${index}`}
                 key={index}
 				zIndex={100}
-				onStart={this.handleStart}
 				onDrag={this.handleDrag}
-				onStop={this.handleStop}>
-                <ChordCard className='draggable-chord'
-                    chord={chord} key={index}/>
+				onDragStop={this.handleStop.bind(this, chord)}>
+                    <ChordCard className='draggable-chord'
+                        chord={chord} key={index}/>
             </Draggable> ) : (
             <ChordCard
                 chord={chord} key={index}/>

@@ -22,11 +22,15 @@ class Songsheet extends Component {
         dispatch(songAdded());
     };
 
+    handleDrop = e => {
+        console.log('drop');
+    };
+
     renderNewSong = () => {
         const { addingSong } = this.props;
         return addingSong ? (
             <DropTarget
-                target={{ accepts: ['c'] }}
+                onDrop={this.handleDrop}
                 className='songsheet__drop-chords'>
                 <div className='songsheet-region__new-song'>
                     <Input className='new-song__title'
