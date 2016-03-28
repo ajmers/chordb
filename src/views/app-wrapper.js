@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { filteredChordSelector } from '../state/reducers/chord-selector';
 
@@ -8,34 +7,23 @@ import ChordCard from '../components/chord-card/chord-card';
 import { Button } from 'react-toolbox/lib/button';
 import Drawer from 'react-toolbox/lib/drawer';
 
-import { Draggable, DropTarget } from '../utils/drag-and-drop';
-//import Draggable from 'react-draggable';
 import Songsheet from './songsheet/songsheet';
 import NewChordEntry from './new-chord/new-chord';
 import ChordFilters from './chord-filters/chord-filters';
 
 import { fetchChords } from '../state/actions/chord-actions';
 import { addChordOpened } from '../state/actions/app-actions';
-import { songsheetToggled } from '../state/actions/songsheet-actions';
+import { songsheetToggled, chordAddedToSong } from '../state/actions/songsheet-actions';
 
 import './app-wrapper.scss';
 
 class AppWrapper extends Component {
     static propTypes = {
+        addingSong: PropTypes.bool,
         addChordOpen: PropTypes.bool.isRequired,
         filteredChords: PropTypes.arrayOf(PropTypes.object),
         songsheetsAreOpen: PropTypes.bool,
     };
-
-    constructor() {
-        super();
-        this.state = {
-            deltaPosition: {
-                top: 0, left: 0,
-            },
-            activeDrags: 0,
-        };
-    }
 
     componentWillMount() {
         const { dispatch } = this.props;
@@ -52,6 +40,11 @@ class AppWrapper extends Component {
         dispatch(songsheetToggled());
     };
 
+    handleAddChordToSong = chord => {
+        const { dispatch } = this.props;
+        dispatch(chordAddedToSong(chord));
+    };
+
     renderOpenSongsheetButton = isOpen => {
         return isOpen ? '' :
             (<div className='songsheet-button'>
@@ -62,40 +55,18 @@ class AppWrapper extends Component {
             </div>);
     };
 
-    handleDrag = (e, ui) => {
-        var {left, top} = this.state.deltaPosition;
-        this.setState({
-            deltaPosition: {
-                left: left + ui.deltaX,
-                top: top + ui.deltaY,
-            }
-        });
-    };
-
-    handleStop(chord) {
-        console.log('stop dragging', chord);
-    }
-
-    renderChord = (chord, index) => {
+    renderChordCard = (chord, index) => {
         const { addingSong } = this.props;
-        const style = {
-            width: 20,
-            height: 20,
-            backgroundColor: 'lightblue',
-        };
-        return addingSong ?
-            ( <Draggable className='draggable-chord-container'
-                ref={`draggable-chord-${index}`}
-                key={index}
-				zIndex={100}
-				onDrag={this.handleDrag}
-				onDragStop={this.handleStop.bind(this, chord)}>
-                    <ChordCard className='draggable-chord'
-                        chord={chord} key={index}/>
-            </Draggable> ) : (
-            <ChordCard
-                chord={chord} key={index}/>
-            );
+        return addingSong ? (
+                <div className='chord-card-with-add' key={index}>
+                    <Button className='add-to-song'
+                        onClick={this.handleAddChordToSong.bind(this, chord)}
+                        mini floating icon='add' />
+                    <ChordCard
+                        chord={chord}/>
+                </div>
+            ) : <ChordCard
+                chord={chord} key={index}/>;
     };
 
     render() {
@@ -122,7 +93,7 @@ class AppWrapper extends Component {
                     </div>
                     <div className='chords'>
                         {chords.map((chord, index) => {
-                            return this.renderChord(chord, index);
+                            return this.renderChordCard(chord, index);
                         })}
                     </div>
                 </div>

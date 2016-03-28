@@ -13,6 +13,7 @@ var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
 var Chord = require('./data/chord');
+var Song = require('./data/song');
 var dbConfig = require('./config');
 //database: 'mongodb://localhost:27017/chordb'
 mongoose.connect(dbConfig.database);
@@ -90,6 +91,19 @@ router.route('/chords/:chord_id')
             res.json(chord);
         });
     });
+
+router.route('/songs')
+    // create a song (accessed at POST http://localhost:8080/api/songs)
+    .post(function(req, res) {
+        var song = new Song(req.body);      // create a new instance of the Song model
+        console.log(song);
+        song.save(function(err, savedSong, numAffected) {
+            if (err)
+                res.send(err);
+
+            res.json({ savedSong });
+        });
+    })
 
 // -----your-webpack-dev-server------------------
 var wdServer = new WebpackDevServer(compiler, {

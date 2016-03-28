@@ -10,7 +10,9 @@ import './chord-card.scss';
 
 export default class ChordCard extends Component {
     static propTypes = {
+        addingSong: PropTypes.bool,
         chord: PropTypes.object,
+        numFrets: PropTypes.number,
     };
 
     static contextTypes = {
@@ -20,7 +22,7 @@ export default class ChordCard extends Component {
 
     getNumFrets(chord) {
         return Math.max.apply(null, chord.fingerings.map(string => {
-            return parseInt(string.fret) ? string.fret : 0;
+            return parseInt(string.fret, 10) ? string.fret : 0;
         }));
     }
 

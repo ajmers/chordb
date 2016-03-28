@@ -3,6 +3,7 @@
     margin: 10px;
     position: relative;
     display: flex;
+    overflow: visible;
     align-items: center;
     .chord-details {
         width: 50%;
@@ -14,5 +15,10 @@
     .drag-handle {
         width: 100%;
         text-align: center;
+    }
+    .add-to-song {
+        position: absolute;
+        top: -8px;
+        right: -8px;
     }
 }
