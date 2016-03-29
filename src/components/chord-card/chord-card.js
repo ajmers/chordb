@@ -12,6 +12,7 @@ export default class ChordCard extends Component {
     static propTypes = {
         addingSong: PropTypes.bool,
         chord: PropTypes.object,
+        buttons: PropTypes.array,
         numFrets: PropTypes.number,
     };
 
@@ -45,11 +46,20 @@ export default class ChordCard extends Component {
     }
 
     render() {
-        const { chord, numFrets } = this.props;
+        const { chord, numFrets, buttons } = this.props;
         const totalFrets =
             numFrets || Math.max(this.getNumFrets(chord), 4);
         return (
             <Card className='chord-card'>
+                <div className='chord-card__buttons'>
+                    {buttons ? buttons.map((button, index) => {
+                        return (<Button
+                            key={index}
+                            onClick={button.onClick}
+                            mini floating icon={button.icon} />
+                        );
+                    }) : null}
+                </div>
                 <CardTitle className='chord-title'>
                     <div className='chord-name'>{this.renderChordName(chord.name)}</div>
                 </CardTitle>

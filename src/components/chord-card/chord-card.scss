@@ -5,6 +5,12 @@
     display: flex;
     overflow: visible;
     align-items: center;
+
+    &__buttons {
+        position: absolute;
+        right: 0;
+    }
+
     .chord-details {
         width: 50%;
         text-align: right;

@@ -65,6 +65,7 @@ app.get('/*', function(req, res) {
 router.route('/chords')
     // create a chord (accessed at POST http://localhost:8080/api/chords)
     .post(function(req, res) {
+        console.log(req.body);
         var chord = new Chord(req.body);      // create a new instance of the Chord model
         // save the bear and check for errors
         console.log(chord);
@@ -92,6 +93,24 @@ router.route('/chords/:chord_id')
         });
     });
 
+router.route('/song/:song_id')
+    // create a song (accessed at POST http://localhost:8080/api/songs)
+    .get(function(req, res) {
+        Song.findById(req.params.song_id, function(err, song) {
+            const chords = [];
+            const fullChords = song.chords.forEach(chord => {
+                console.log(chord);
+                Chord.findById(chord._id, function(err, chord) {
+                    console.log(chord);
+                    chords.push(chord);
+                });
+            });
+            song.chords = chords;
+            console.log(song);
+            res.json(song);
+        });
+    })
+
 router.route('/songs')
     // create a song (accessed at POST http://localhost:8080/api/songs)
     .post(function(req, res) {
@@ -102,6 +121,14 @@ router.route('/songs')
                 res.send(err);
 
             res.json({ savedSong });
+        });
+    })
+    .get(function(req, res) {
+        Song.find(function(err, songs) {
+            if (err)
+                res.send(err);
+
+            res.json(songs);
         });
     })
 

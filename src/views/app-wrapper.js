@@ -30,6 +30,13 @@ class AppWrapper extends Component {
         dispatch(fetchChords());
     }
 
+    getCardButtons = (chord) => {
+        return this.props.addingSong ? [{
+            icon: 'add',
+            onClick: this.handleAddChordToSong.bind(this, chord),
+        }] : [];
+    };
+
     handleAddChordClick = e => {
         const { dispatch } = this.props;
         dispatch(addChordOpened());
@@ -55,19 +62,11 @@ class AppWrapper extends Component {
             </div>);
     };
 
-    renderChordCard = (chord, index) => {
-        const { addingSong } = this.props;
-        return addingSong ? (
-                <div className='chord-card-with-add' key={index}>
-                    <Button className='add-to-song'
-                        onClick={this.handleAddChordToSong.bind(this, chord)}
-                        mini floating icon='add' />
-                    <ChordCard
-                        chord={chord}/>
-                </div>
-            ) : <ChordCard
-                chord={chord} key={index}/>;
-    };
+    renderChordCard = (chord, index) => (
+        <ChordCard
+            buttons={this.getCardButtons.call(this, chord)}
+            chord={chord} key={index}/>
+    );
 
     render() {
         const { filteredChords: chords = [], addChordOpen,

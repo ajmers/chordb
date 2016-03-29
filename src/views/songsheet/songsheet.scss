@@ -9,7 +9,7 @@
     &--closed {
         flex-grow: .0001;
         transition: flex-grow 1000ms linear;
-        #{$this}__new-song, #{$this}__header {
+        #{$this}__new-song, #{$this}__header, #{$this}__songs {
             display: none;
         }
     }
@@ -19,6 +19,10 @@
     }
     &__close, &__add-song {
         margin: 20px 10px;
+    }
+
+    &__songs {
+        margin: 10px;
     }
 
     &__new-song {

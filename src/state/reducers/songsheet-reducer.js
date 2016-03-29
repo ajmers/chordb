@@ -7,9 +7,22 @@ const initialState = {
         title: '',
         chords: [],
     },
+    songs: [],
 };
 
 export default createReducer(initialState, {
+    ['SONGS_FETCHED']: (state, action) => {
+        return {
+            ...state,
+            songs: action.data.songs,
+        };
+    },
+    ['SONG_CHORDS_FETCHED']: (state, action) => {
+        return {
+            ...state,
+            fetchedSong: action.data.res,
+        };
+    },
     ['SONGSHEET_TOGGLED']: (state, action) => {
         return {
             ...state,
@@ -20,6 +33,12 @@ export default createReducer(initialState, {
         return {
             ...state,
             addingSong: true,
+        };
+    },
+    ['SONG_SAVED']: (state, action) => {
+        return {
+            ...state,
+            addingSong: false,
         };
     },
     ['SONG_TITLE_CHANGED']: (state, action) => {
@@ -45,11 +64,19 @@ export default createReducer(initialState, {
             },
         };
     },
-    ['SONG_SAVED']: (state, action) => {
-        const { savedSong } = action.data;
+    ['SONG_CHORD_REMOVED']: (state, action) => {
+        const { chord } = action.data;
+        const { currentSong } = state;
+        const { chords } = currentSong;
+        const chordsWithoutRemoved = chords.filter(ch => {
+            return ch.id !== chord.id;
+        });
         return {
             ...state,
-            currentSong: savedSong,
+            currentSong: {
+                ...currentSong,
+                chords: chordsWithoutRemoved,
+            },
         };
     },
 });

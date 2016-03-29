@@ -16,7 +16,7 @@
     "new-cap": [2, { "capIsNewExceptions": ["DragDropContext"] }],
     "dot-notation": 1,
     "padded-blocks": 1,
-    "react/jsx-boolean-value": [2, "always"],
+    "react/jsx-boolean-value": [2, “never”],
     "react/prop-types": [2, { "ignore": ["dispatch"] }],
     "react/no-multi-comp": 1,
     "react/sort-comp": 1,
