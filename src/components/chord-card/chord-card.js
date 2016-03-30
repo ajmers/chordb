@@ -55,8 +55,8 @@ export default class ChordCard extends Component {
                     {buttons ? buttons.map((button, index) => {
                         return (<Button
                             key={index}
-                            onClick={button.onClick}
-                            mini floating icon={button.icon} />
+                            onClick={button.onClick.bind(this, chord)}
+                            mini accent floating icon={button.icon} />
                         );
                     }) : null}
                 </div>

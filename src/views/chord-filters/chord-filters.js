@@ -18,11 +18,14 @@ class ChordFilters extends Component {
     };
 
     render() {
+        const { filters } = this.props;
         return (
             <div className='search-filters'>
                 {filterOptions.map((filter, index) => {
+                    const value = filters[filter.name];
                     return (
                         <ChordFilter key={index}
+                            value={value}
                             onChange={this.onFilterChange}
                             filter={filter}
                             />

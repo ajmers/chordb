@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { filteredChordSelector } from '../state/reducers/chord-selector';
+import { filteredChordSelector } from '../state/selectors/chord-selector';
 
 import Library from './library/library';
 

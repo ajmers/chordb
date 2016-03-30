@@ -1,10 +1,14 @@
-.songsheet-region {
+.songsheet {
     $this: &;
+    position: fixed;
     display: flex;
-    flex: 2;
-    flex-direction: column;
     background-color: darkgray;
-    transition: flex-grow 1000ms linear;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    height: 40%;
+    flex-direction: column;
 
     &--closed {
         flex-grow: .0001;
@@ -14,23 +18,29 @@
         }
     }
     &__header {
+        height: 100px;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
     }
-    &__close, &__add-song {
-        margin: 20px 10px;
+
+    &__controls {
+        z-index: 2;
+    }
+
+    &__title {
+        padding-left: 20px;
     }
 
     &__songs {
         margin: 10px;
     }
 
-    &__new-song {
-        flex: 1;
-        background-color: white;
-        margin: 10px;
-        .new-song__title {
-            margin: 10px;
-        }
+    &__chords {
+        display: flex;
+        overflow-x: scroll;
+    }
+
+    &__song {
+        overflow: scroll;
     }
 }

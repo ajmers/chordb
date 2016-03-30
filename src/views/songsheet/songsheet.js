@@ -1,14 +1,13 @@
 import React, { Component, PropTypes } from 'react';
-import { Button } from 'react-toolbox/lib/button';
-import Input from 'react-toolbox/lib/input';
 import ChordCard from '../../components/chord-card/chord-card';
+import SongsheetHeader from './songsheet-header';
+import { Song } from './song';
 import { connect } from 'react-redux';
 import { songsheetToggled,
     songAdded,
     songSelected,
     chordRemovedFromSong,
     songTitleChanged,
-    songSaved,
     songsFetched } from '../../state/actions/songsheet-actions';
 import './songsheet.scss';
 
@@ -52,34 +51,9 @@ class Songsheet extends Component {
         dispatch(songTitleChanged(title));
     };
 
-    handleSongSaved = () => {
-        const { dispatch, currentSong } = this.props;
-        dispatch(songSaved(currentSong));
-    };
-
     handleSelectSong = (song) => {
         const { dispatch } = this.props;
         dispatch(songSelected(song));
-    };
-
-    renderNewSong = () => {
-        const { addingSong, currentSong: { chords } } = this.props;
-        return addingSong ? (
-            <div className='songsheet__chords'>
-                <div className='songsheet-region__new-song'>
-                    <Input className='new-song__title'
-                        onChange={this.handleSongTitleChanged}
-                        label='Song title' />
-                </div>
-                <div className='songsheet-region__chords'>
-                    {chords.map((chord, index) => {
-                        return (<ChordCard
-                            buttons={this.getCardButtons.call(this, chord)}
-                            chord={chord} key={index}/>);
-                    })}
-                </div>
-            </div>
-        ) : '';
     };
 
     renderSongList = () => {
@@ -122,27 +96,17 @@ class Songsheet extends Component {
     };
 
     render() {
-        const { isOpen, addingSong, currentSong: { chords } } = this.props;
+        const { isOpen, addingSong,
+            currentSong } = this.props;
+        const { title, chords } = currentSong;
         const closedClass = isOpen ? '' : '--closed';
         return (
-            <div className={`songsheet-region${closedClass}`}>
-                <div className='songsheet-region__header'>
-                    { chords.length ? (
-                        <Button className='new-song__save'
-                            icon='save'
-                            onClick={this.handleSongSaved}
-                            label='Save'
-                            flat primary />) : '' }
-                    <Button className='songsheet-region__add-song'
-                        onClick={this.handleAddSongClick}
-                        icon='add' inverted mini floating />
-
-                    <Button className='songsheet-region__close'
-                        onClick={this.handleCloseClick}
-                        icon='close' inverted mini floating />
-                </div>
-                { addingSong ? this.renderNewSong :
-                        this.renderCurrentSong() }
+            <div className={`songsheet${closedClass}`}>
+                <SongsheetHeader
+                    title={title}
+                    song={currentSong}
+                    songIsUnsaved={addingSong}/>
+                <Song chords={chords} />
             </div>
         );
     }

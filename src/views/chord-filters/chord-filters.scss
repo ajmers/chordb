@@ -3,5 +3,16 @@
     .search-filter {
         margin: 10px;
         width: 200px;
+        &__dropdown {
+            ul {
+                padding-left: 0px;
+            }
+            input {
+                font-size: 1rem;
+            }
+            li {
+                color: black;
+            }
+        }
     }
 }

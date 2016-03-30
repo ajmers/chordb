@@ -16,6 +16,7 @@ export class ChordFilter extends Component {
         return (
             <div className='search-filter'>
                 <Dropdown
+                    className='search-filter__dropdown'
                     auto={true}
                     onChange={onChange.bind(this, filter.name)}
                     label={filter.name}

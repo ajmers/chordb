@@ -3,7 +3,7 @@ import { Button } from 'react-toolbox/lib/button';
 import Input from 'react-toolbox/lib/input';
 import Dropdown from 'react-toolbox/lib/dropdown';
 import { connect } from 'react-redux';
-import { validateChord } from '../../state/reducers/new-chord-selector';
+import { validateChord } from '../../state/selectors/new-chord-selector';
 import { instrumentOptions, tonicOptions, typeOptions } from '../../constants/chord-options';
 
 import ChordCard from '../../components/chord-card/chord-card';
