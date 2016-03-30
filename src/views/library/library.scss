@@ -1,0 +1,19 @@
+.chord-library {
+    font-family: Roboto;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 100px;
+
+    .controls {
+        display: flex;
+        justify-content: space-between;
+    }
+    .chords-selection {
+        flex: 1;
+    }
+    .chords {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+}

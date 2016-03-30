@@ -3,8 +3,13 @@ import { Button } from 'react-toolbox/lib/button';
 import Input from 'react-toolbox/lib/input';
 import ChordCard from '../../components/chord-card/chord-card';
 import { connect } from 'react-redux';
-import { songsheetToggled, songAdded, songSelected, chordRemovedFromSong,
-    songTitleChanged, songSaved, songsFetched } from '../../state/actions/songsheet-actions';
+import { songsheetToggled,
+    songAdded,
+    songSelected,
+    chordRemovedFromSong,
+    songTitleChanged,
+    songSaved,
+    songsFetched } from '../../state/actions/songsheet-actions';
 import './songsheet.scss';
 
 class Songsheet extends Component {
@@ -81,9 +86,9 @@ class Songsheet extends Component {
         const { songs } = this.props;
         return (
             <div className='songsheet__songs'>
-                {songs.map(song => {
+                {songs.map((song, index) => {
                     return (
-                        <div className='songsheet__song'
+                        <div className='songsheet__song' key={index}
                             onClick={this.handleSelectSong.bind(this, song)}>
                             {song.title}
                         </div>

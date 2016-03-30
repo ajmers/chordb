@@ -5,33 +5,15 @@
     .app-layout {
         display: flex;
     }
-    .controls {
-        display: flex;
-        justify-content: space-between;
-    }
-    .chords-selection {
-        flex: 1;
-    }
-    .chords {
-        display: flex;
-        align-items: flex-start;
-        flex-wrap: wrap;
-    }
-    .draggable-chord-container {
-        position: relative;
-        margin: 10px;
+
+    .app-menu-bar {
+        background-color: pink;
     }
 
-    .drag-handle {
-        position: absolute;
-        text-align: center;
+    .controls {
         width: 100%;
-        z-index: 5;
-    }
-    .draggable-chord {
-        max-width: 250px;
-        margin: 10px;
-        display: flex;
         align-items: center;
+        display: flex;
+        justify-content: space-between;
     }
 }

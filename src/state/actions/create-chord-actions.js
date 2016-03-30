@@ -72,7 +72,7 @@ export function addFretClicked(length) {
 }
 
 export function minFretChanged(chord, value) {
-    const numericalValue = parseInt(value) || 0;
+    const numericalValue = parseInt(value, 10) || 0;
     const updatedChord = updateChordMeta(chord, { minFret: numericalValue });
     return {
         type: 'MIN_FRET_CHANGED',

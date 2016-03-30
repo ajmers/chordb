@@ -13,8 +13,8 @@ import {
     fretClicked,
     stringMarkerClicked,
     addFretClicked,
-    minFretChanged } from '../../state/actions/add-chord-actions';
-import { addChordClosed } from '../../state/actions/app-actions';
+    minFretChanged } from '../../state/actions/create-chord-actions';
+import { createChordClosed } from '../../state/actions/app-actions';
 import './new-chord.scss';
 
 const chordOptions = [instrumentOptions, tonicOptions, typeOptions];
@@ -77,7 +77,7 @@ class NewChordEntry extends Component {
 
     handleDrawerClick = e => {
         const { dispatch } = this.props;
-        dispatch(addChordClosed());
+        dispatch(createChordClosed());
     };
 
     handleChordSaved = () => {
@@ -92,9 +92,9 @@ class NewChordEntry extends Component {
         const value = chordProps[picker.name];
         const renderOption = chordProps.instrumentChosen || picker.name === 'instrument';
         return renderOption ? (
-            <div className='search-filter' key={index}>
+            <div className='new-chord-option' key={index}>
                 <Dropdown
-                    className='search-filter__dropdown'
+                    className='new-chord-option__dropdown'
                     auto={true}
                     onChange={this.onPickerChange.bind(this, picker.name)}
                     label={picker.name}
@@ -105,18 +105,10 @@ class NewChordEntry extends Component {
         ) : '';
     };
 
-    renderChart = () => {
-        const { chordProperties: chordProps, chord, numFrets } = this.props;
-        if (!chordProps.instrumentChosen) {
-            return '';
-        } else {
-            return <ChordCard chord={chord} numFrets={numFrets} />;
-        }
-    };
-
     render() {
-        const { chordCanSave, chordProperties = {} } = this.props;
-        const { name = '' } = chordProperties;
+        const { chordCanSave, chordProperties: chordProps = {},
+            chord, numFrets } = this.props;
+        const { name = '' } = chordProps;
         return (
             <div className='new-chord-entry'>
                 <div className='new-chord__header'>
@@ -137,12 +129,16 @@ class NewChordEntry extends Component {
                             label='Save'
                             flat primary />) : ''}
                 </div>
-
-                <div className='new-chord__options'>
-                    {chordOptions.map(this.renderPicker)}
-                </div>
-                <div className='new-chord__grid'>
-                    {this.renderChart()}
+                <div className='new-chord__body'>
+                    <div className='new-chord__options'>
+                        {chordOptions.map(this.renderPicker)}
+                    </div>
+                    <div className='new-chord__grid'>
+                        {chordProps.instrumentChosen ?
+                            <ChordCard chord={chord} numFrets={numFrets} />
+                                : null
+                        }
+                    </div>
                 </div>
             </div>
         );

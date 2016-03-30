@@ -1,26 +1,26 @@
 import createReducer from '../../utils/create-reducer';
 
 const initialState = {
-    addChordOpen: false,
+    createChordOpen: false,
 };
 
 export default createReducer(initialState, {
-    ['ADD_CHORD_OPENED']: (state, action) => {
+    ['CREATE_CHORD_OPENED']: (state, action) => {
         return {
             ...state,
-            addChordOpen: true,
+            createChordOpen: true,
         };
     },
     ['CHORD_SAVED']: (state, action) => {
         return {
             ...state,
-            addChordOpen: false,
+            createChordOpen: false,
         };
     },
-    ['ADD_CHORD_CLOSED']: (state, action) => {
+    ['CREATE_CHORD_CLOSED']: (state, action) => {
         return {
             ...state,
-            addChordOpen: false,
+            createChordOpen: false,
         };
     },
 });

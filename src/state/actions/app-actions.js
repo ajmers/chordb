@@ -1,11 +1,11 @@
-export function addChordOpened() {
+export function createChordOpened() {
     return {
-        type: 'ADD_CHORD_OPENED',
+        type: 'CREATE_CHORD_OPENED',
     };
 }
 
-export function addChordClosed() {
+export function createChordClosed() {
     return {
-        type: 'ADD_CHORD_CLOSED',
+        type: 'CREATE_CHORD_CLOSED',
     };
 }
