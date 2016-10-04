@@ -29,13 +29,13 @@ class SongsheetHeader extends Component {
     };
 
     renderSongTitle = () => {
-        const { songIsUnsaved, title } = this.props;
+        const { songIsUnsaved, song } = this.props;
         return (
             <div className='songsheet__title'>
                 {songIsUnsaved ? (
                     <Input className='new-song__title'
                         onChange={this.handleSongTitleChanged}
-                        label='Song title' />) : <span>{title}</span>
+                        label='Song title' />) : <span>{song.title}</span>
                 }
             </div>
         );

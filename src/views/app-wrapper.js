@@ -8,7 +8,7 @@ import { Button } from 'react-toolbox/lib/button';
 import AppBar from 'react-toolbox/lib/app_bar';
 import Dialog from 'react-toolbox/lib/dialog';
 
-import Songsheet from './songsheet/songsheet';
+import SongsheetWrapper from './songsheet/songsheet-wrapper';
 import NewChordEntry from './new-chord/new-chord';
 import ChordFilters from './chord-filters/chord-filters';
 
@@ -64,7 +64,7 @@ class AppWrapper extends Component {
                     </div>
                 </AppBar>
 
-                <Songsheet isOpen={songsheetsAreOpen}/>
+                <SongsheetWrapper isOpen={songsheetsAreOpen}/>
 
                 <Library chords={chords} />
 
@@ -83,5 +83,6 @@ export default connect(state => ({
     createChordOpen: state.app.createChordOpen,
     filteredChords: filteredChordSelector(state),
     songsheetsAreOpen: state.songsheets.isOpen,
+    songs: state.songsheets.songs,
     addingSong: state.songsheets.addingSong,
 }))(AppWrapper);

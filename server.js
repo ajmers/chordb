@@ -97,25 +97,19 @@ router.route('/song/:song_id')
     // create a song (accessed at POST http://localhost:8080/api/songs)
     .get(function(req, res) {
         Song.findById(req.params.song_id, function(err, song) {
-            const chords = [];
-            const fullChords = song.chords.forEach(chord => {
-                console.log(chord);
-                Chord.findById(chord._id, function(err, chord) {
-                    console.log(chord);
-                    chords.push(chord);
-                });
+            const chordPromises = song.chords.map(chord => {
+                return Chord.findById(chord);
             });
-            song.chords = chords;
-            console.log(song);
-            res.json(song);
+            Promise.all(chordPromises).then(values => {
+                res.json({ title: song.title, chords: values });
+            });
         });
-    })
+    });
 
 router.route('/songs')
     // create a song (accessed at POST http://localhost:8080/api/songs)
     .post(function(req, res) {
         var song = new Song(req.body);      // create a new instance of the Song model
-        console.log(song);
         song.save(function(err, savedSong, numAffected) {
             if (err)
                 res.send(err);
@@ -130,7 +124,7 @@ router.route('/songs')
 
             res.json(songs);
         });
-    })
+    });
 
 // -----your-webpack-dev-server------------------
 var wdServer = new WebpackDevServer(compiler, {
